@@ -1,11 +1,14 @@
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-function Link() {
+interface Props {
+    name?: string,
+    target?: string,
+}
+
+function Link(props: Props) {
     return (
         <Container>
-            <a href="#">Example Link</a>
+            <a href={props.target == null ? "/" : props.target}>{props.name}</a>
         </Container>
     );
 }
