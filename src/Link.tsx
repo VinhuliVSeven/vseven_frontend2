@@ -8,7 +8,7 @@ interface Props {
 function Link(props: Props) {
     return (
         <Container>
-            <a href={props.target == null ? "/" : props.target}>{props.name}</a>
+            <a href={props.target == null ? "" : props.target}>{props.name}</a>
         </Container>
     );
 }
