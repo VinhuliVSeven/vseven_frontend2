@@ -1,7 +1,29 @@
 .vertical-center {
     position: relative;
-    top: 40%;
-    -webkit-transform: translateY(-40%);
-    -ms-transform: translateY(-40%);
-    transform: translateY(-40%);
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.image {
+    width: 62px;
+    max-width: 62px;
+}
+
+.overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.overflow:hover{
+    overflow: visible;
+    background-color: white;
+    width: fit-content;
+}
+
+p {
+    margin-bottom: 0px;
 }

@@ -14,7 +14,7 @@ function getSectionById(id: string) {
 function SectionLinks(props: Props) {
     return (
         <>
-            <Accordion defaultActiveKey='0'>
+            <Accordion defaultActiveKey='1'>
                 <Accordion.Item eventKey='0'>
                     <Accordion.Header>{getSectionById(props.id).section_name}</Accordion.Header>
                     <Accordion.Body>

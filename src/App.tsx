@@ -41,22 +41,22 @@ function App() {
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
-						<Stack gap={3}>
+						<Stack gap={3} key={loggedIn ? 0 : 1}>
 							{ order.data[0].map((id) => <SectionLinks id={id}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
-						<Stack gap={3}>
+						<Stack gap={3} key={loggedIn ? 0 : 1}>
 							{ order.data[1].map((id) => <SectionLinks id={id}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
-						<Stack gap={3}>
+						<Stack gap={3} key={loggedIn ? 0 : 1}>
 							{ order.data[2].map((id) => <SectionLinks id={id}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
-						<Stack gap={3}>
+						<Stack gap={3} key={loggedIn ? 0 : 1}>
 							{ order.data[3].map((id) => <SectionLinks id={id}></SectionLinks>) }
 						</Stack>
 					</Col>
