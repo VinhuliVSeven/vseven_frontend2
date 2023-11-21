@@ -22,6 +22,8 @@
     overflow: visible;
     background-color: white;
     width: fit-content;
+    z-index: 100;
+    position: relative;
 }
 
 p {

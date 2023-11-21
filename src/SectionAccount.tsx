@@ -26,9 +26,9 @@ function SectionAccount(props: Props) {
                                 <Col sm='2' md='2' lg='2' xl='2' className='ps-0 image'>
                                     <Image src={profile} roundedCircle fluid/>
                                 </Col>
-                                <Col xs='7' sm='7' md='7' lg='7' xl='7' className='ps-1'>
+                                <Col xs='6' sm='7' md='7' lg='7' xl='8' className='ps-1'>
                                     <Card.Title><p className='overflow'>Example Student</p></Card.Title>
-                                    <Card.Subtitle className='mb-2 text-muted'><p className='overflow'>example@vinuni.edu.vn</p></Card.Subtitle>
+                                    <Card.Subtitle className='mb-2 text-muted'><p className='overflow'>exampleexample@vinuni.edu.vn</p></Card.Subtitle>
                                 </Col>
                             </Row>
                         </Container>
