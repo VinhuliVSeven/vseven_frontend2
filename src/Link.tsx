@@ -8,9 +8,10 @@ interface Props {
 }
 
 function Link(props: Props) {
+
     return (
         <Container>
-            <a href={props.target == null || props.target == '' ? 'http://google.com' : props.target}>
+            <a href={props.target == null || props.target == '' ? '/' : props.target}>
                 <p className='hanging mb-0'>{props.name}</p>
             </a>
         </Container>

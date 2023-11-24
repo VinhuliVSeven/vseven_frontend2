@@ -1,20 +1,27 @@
 import Card from 'react-bootstrap/Card';
 
-import Link from './Link';
+import LinkJson from './LinkJson';
+import bookmarks from './json/bookmarks.json'
 
-function SectionQuick() {
+interface Props {
+    reload: () => any,
+}
+
+function SectionQuick(props: Props) {
 
     return (
     <>
         <Card>
             <Card.Header as='h6'>Quick Links</Card.Header>
             <Card.Body>
-            <Link name='Example Link 1'></Link>
-                <Link name='Example Link 2'></Link>
-                <Link name='Example Link 3'></Link>
-                <Link name='Example Link 4'></Link>
-                <Link name='Example Link 5'></Link>
-                <Link name='Example Link 6'></Link>
+                {
+                    bookmarks.data.map(
+                        (link) => {
+                            if (link[0] == '' || link[1] == '') return;
+                            return (<LinkJson section_id={link[0]} link_id={link[1]} reload={props.reload} bookmark={true}></LinkJson>);
+                        }
+                    )
+                }
             </Card.Body>
         </Card>
     </>

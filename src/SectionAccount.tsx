@@ -9,7 +9,8 @@ import './SectionAccount.css'
 
 interface Props {
 	state: boolean,
-	setState?: any;
+	setState: any,
+    reset: () => any
 }   
 
 function SectionAccount(props: Props) {
@@ -33,7 +34,7 @@ function SectionAccount(props: Props) {
                             </Row>
                         </Container>
                         <Button className='' variant='primary' onClick={props.setState}>Log Out</Button>{' '}
-                        <Button className='' variant='primary'>Reset</Button>{' '}
+                        <Button className='' variant='primary' onClick={props.reset}>Reset</Button>{' '}
                     </> : null
                 }
                 {
