@@ -10,3 +10,11 @@
 .bookmark:hover {
     cursor: pointer;
 }
+
+.grip {
+    color: black;
+}
+
+.grip:hover {
+    cursor: grab;
+}

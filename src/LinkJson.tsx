@@ -5,6 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import './Link.css';
 import bookmark from './assets/bookmark.svg';
 import bookmark_fill from './assets/bookmark-fill.svg';
+import grip from './assets/grip-vertical.svg';
+
 import links from './json/links.json';
 import bookmarks from './json/bookmarks.json';
 
@@ -13,7 +15,8 @@ interface Props {
     section_id: string,
     link_id: string,
     reload: () => any,
-    bookmark?: Boolean
+    select: (value: Array<string>) => any,
+    active?: Boolean
 }
 
 function getSectionById(section_id: string) {
@@ -49,16 +52,27 @@ function LinkJson(props: Props) {
         console.table(bookmarks.data)
     };
 
+    const drag = () => {
+        props.select([props.section_id, props.link_id]);
+    }
+
     return (
         <Container>
             <Row>
+                {
+                    props.active ? <>
+                        <Col md='1' lg='1'>
+                            <img onClick={drag} src={grip} alt='' className='grip'/>
+                        </Col>
+                    </> : ''
+                }
                 <Col md lg>
                     <a href={getLinkById(props.section_id, props.link_id).link_target}>
                         <p className='hanging mb-0'>{getLinkById(props.section_id, props.link_id).link_name}</p>
                     </a>
                 </Col>
                 {
-                    props.bookmark ? <>
+                    props.active ? <>
                         <Col md='2' lg='1'>
                             <img onClick={toggleBookmarked} src={bookmarked ? bookmark_fill : bookmark} alt="Bookmark" className='bookmark float-right'/>
                         </Col>

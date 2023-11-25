@@ -43,6 +43,14 @@ function App() {
 		reload();
 	}
 
+	const [selectionType, setSelectionType] = useState('');
+	const [selectionValue, setSelectionValue] = useState([]);
+
+	const setSelection = (type: string, value: any) => {
+		setSelectionType(type);
+		setSelectionValue(value);
+	}
+
 	return (
 		<>
 			<Header></Header>
@@ -53,8 +61,8 @@ function App() {
 							<SectionAccount state={loggedIn} setState={toggleLoggedIn} reset={reset}></SectionAccount>
 							{
 								loggedIn ? <>
-									<SectionLaunchpad></SectionLaunchpad>
-									<SectionQuick reload={reload} key={seed}></SectionQuick>
+									<SectionLaunchpad type={selectionType} value={selectionValue}></SectionLaunchpad>
+									<SectionQuick select={setSelection} reload={reload} key={seed}></SectionQuick>
 								</> : null
 							}
 							<SectionFrequent></SectionFrequent>
@@ -62,22 +70,22 @@ function App() {
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[0].map((id) => <SectionLinks id={id} reload={reload} active={loggedIn}></SectionLinks>) }
+							{ order.data[0].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[1].map((id) => <SectionLinks id={id} reload={reload} active={loggedIn}></SectionLinks>) }
+							{ order.data[1].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[2].map((id) => <SectionLinks id={id} reload={reload} active={loggedIn}></SectionLinks>) }
+							{ order.data[2].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[3].map((id) => <SectionLinks id={id} reload={reload} active={loggedIn}></SectionLinks>) }
+							{ order.data[3].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 				</Row>
