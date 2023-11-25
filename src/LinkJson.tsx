@@ -20,11 +20,19 @@ interface Props {
 }
 
 function getSectionById(section_id: string) {
-    return links.data.filter((section) => section_id == section.id)[0];
+    return links.data.filter((section) => section_id == section.section_id)[0];
 }
 
 function getLinkById(section_id: string, link_id: string) {
-    return getSectionById(section_id).section_links.filter((link) => link.id == link_id)[0];
+    var links = getSectionById(section_id).section_links.filter((link) => link.link_id == link_id);
+    if (links.length == 0) {
+        return {
+            "link_id": link_id,
+            "link_name": "<<LINK DOES NOT EXIST>>",
+            "url": "/"
+        }
+    }
+    return getSectionById(section_id).section_links.filter((link) => link.link_id == link_id)[0];
 }
 
 function checkBookmark(section_id: string, link_id: string) {
@@ -48,8 +56,6 @@ function LinkJson(props: Props) {
 
         setBookmarked(!bookmarked);
         props.reload();
-
-        console.table(bookmarks.data)
     };
 
     const drag = () => {
@@ -67,7 +73,7 @@ function LinkJson(props: Props) {
                     </> : ''
                 }
                 <Col md lg>
-                    <a href={getLinkById(props.section_id, props.link_id).link_target}>
+                    <a href={getLinkById(props.section_id, props.link_id).url}>
                         <p className='hanging mb-0'>{getLinkById(props.section_id, props.link_id).link_name}</p>
                     </a>
                 </Col>

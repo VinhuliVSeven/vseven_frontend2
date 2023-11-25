@@ -11,7 +11,7 @@ interface Props {
 function SectionQuick(props: Props) {
 
     const setSelection = (value: any) => {
-        props.select('quick links', value);
+        props.select('quick link', value);
     }
 
     return (

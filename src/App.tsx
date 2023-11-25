@@ -22,13 +22,21 @@ import bookmarks from './json/bookmarks.json';
 import expand from './json/expand.json';
 
 function resetData() {
-	order.data = [["1", "2", "5"], ["3", "4"], ["6", "7"], ["8", "9", "10"]];
-	bookmarks.data = [["", ""]];
+	order.data.section_order = [["1", "2", "5"], ["3", "4"], ["6", "7"], ["8", "9", "10"]];
+	order.data.link_order = [{section_id: "", order: []}]
+	bookmarks.data = [["-1", "-1"]];
 	bookmarks.data.splice(0, 1);
 	expand.data = [""];
 }
 
 function App() {
+	bookmarks.data.filter((link_order) => link_order[0] == "-1" || link_order[1] == "-1").forEach((element) => {
+		var index = bookmarks.data.indexOf(element);
+		if (index != -1) {
+			bookmarks.data.splice(index, 1);
+		}
+	})
+
 	const [seed, setSeed] = useState(1);
 	const reload = () => setSeed(Math.random());
 
@@ -61,7 +69,7 @@ function App() {
 							<SectionAccount state={loggedIn} setState={toggleLoggedIn} reset={reset}></SectionAccount>
 							{
 								loggedIn ? <>
-									<SectionLaunchpad type={selectionType} value={selectionValue}></SectionLaunchpad>
+									<SectionLaunchpad type={selectionType} value={selectionValue} reload={reload}></SectionLaunchpad>
 									<SectionQuick select={setSelection} reload={reload} key={seed}></SectionQuick>
 								</> : null
 							}
@@ -70,22 +78,22 @@ function App() {
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[0].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[0].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[1].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[1].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[2].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[2].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ order.data[3].map((id) => <SectionLinks id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[3].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 				</Row>
