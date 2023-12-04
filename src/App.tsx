@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import { useState } from 'react';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Stack from 'react-bootstrap/Stack';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -62,6 +63,7 @@ function App() {
 	return (
 		<>
 			<Header></Header>
+			{/* <DragDropContext> */}
 			<Container fluid className='vh-100 d-flex flex-column'>
 				<Row className='h-100'>
 					<Col className='bg-dark pt-3'>
@@ -98,6 +100,7 @@ function App() {
 					</Col>
 				</Row>
 			</Container>
+			{/* </DragDropContext> */}
 		</>
 	);
 }

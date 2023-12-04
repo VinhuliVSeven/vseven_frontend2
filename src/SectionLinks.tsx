@@ -1,5 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
+import { DragDropContext, DropResult, Droppable, ResponderProvided, Draggable } from 'react-beautiful-dnd';
+import { useState } from 'react';
 
 import LinkJson from './LinkJson';
 import grip from './assets/grip-vertical.svg';
@@ -19,7 +20,10 @@ interface Props {
     active?: Boolean
 };
 
+
 function SectionLinks(props: Props) {
+    const [items, setItems] = useState(getSectionById(props.section_id).section_links);
+    
     let activeKey = false;
     if (props.active == true) activeKey = expand.data.includes(props.section_id);
 
@@ -47,8 +51,18 @@ function SectionLinks(props: Props) {
         }
     }
 
+    const onDragEnd = (result: DropResult) => {
+        const { source, destination, draggableId } = result;
+        if (!destination) return;
+        const newItems = Array.from(items);
+        const [removed] = newItems.splice(result.source.index, 1);
+        if (result == null || result == undefined) return;
+        newItems.splice(destination.index, 0, removed);
+        setItems(newItems);
+    }
+
     return (
-        <>
+        <>  
             <Accordion
                 defaultActiveKey={activeKey ? '0' : '1'}
                 onSelect={() => {
@@ -77,7 +91,24 @@ function SectionLinks(props: Props) {
                         {getSectionById(props.section_id).section_name}
                     </Accordion.Header>
                     <Accordion.Body className={props.active ? 'ps-0' : ''}>
-                        {getLinks()}
+                        {/* {getLinks()} */}
+                        <DragDropContext onDragEnd={onDragEnd}>
+                            <Droppable droppableId={props.section_id}>
+                                {(provided) => (
+                                    <ul className={props.section_id} {...provided.droppableProps} ref={provided.innerRef}>
+                                        {items.map((item, index) => (
+                                            <Draggable key={item.link_id} draggableId={item.link_id} index={index}>
+                                                {(provided) => (
+                                                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><a href={item.url}>{item.link_name}</a></li>
+                                                    // <LinkJson section_id={props.section_id} link_id={items.link_id} reload={props.reload} select={setSelectionLink} active={props.active}></LinkJson>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </ul>
+                                )}
+                            </Droppable> 
+                        </DragDropContext>
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
