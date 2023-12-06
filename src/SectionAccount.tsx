@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import profile from './assets/profile.png';
 
-import './SectionAccount.css'
+import './css/SectionAccount.css'
 
 interface Props {
 	state: boolean,

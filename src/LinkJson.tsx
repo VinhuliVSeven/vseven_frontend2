@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap';
 
-import './Link.css';
+
+import './css/Link.css';
 import bookmark from './assets/bookmark.svg';
 import bookmark_fill from './assets/bookmark-fill.svg';
 import grip from './assets/grip-vertical.svg';
@@ -86,7 +87,6 @@ function LinkJson(props: Props) {
                 }
                 
             </Row>
-            
         </Container>
     );
 }

@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 
-import './Link.css'
+import './css/Link.css';
 
 interface Props {
     name?: string,

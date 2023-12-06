@@ -8,7 +8,7 @@ import links from './json/links.json';
 import order from './json/order.json';
 import bookmarks from './json/bookmarks.json';
 
-import './SectionLaunchpad.css';
+import './css/SectionLaunchpad.css';
 
 function reorderSection(direction: string, value: Array<string>) {
     var section_id = value[0];
@@ -19,7 +19,6 @@ function reorderSection(direction: string, value: Array<string>) {
     // find section position in ordering
     for (column = 0; column < 4; column++) {
         for (index = 0; index < order.data.section_order[column].length; index++) {
-            console.log(order.data.section_order[column][index]);
             if (order.data.section_order[column][index] == section_id) {
                 maxIndex = order.data.section_order[column].length - 1;
                 break;

@@ -3,7 +3,7 @@
 }
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './App.css';
+import './css/App.css';
 
 import { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -80,22 +80,22 @@ function App() {
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[0].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[0].map((id) => <SectionLinks sectionId={id} reload={reload} loggedIn={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[1].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[1].map((id) => <SectionLinks sectionId={id} reload={reload} loggedIn={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[2].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[2].map((id) => <SectionLinks sectionId={id} reload={reload} loggedIn={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 					<Col className='pt-3'>
 						<Stack gap={3} key={seed}>
-							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[3].map((id) => <SectionLinks section_id={id} reload={reload} select={setSelection} active={loggedIn}></SectionLinks>) }
+							{ (loggedIn ? order.data.section_order : order.data.section_order_default)[3].map((id) => <SectionLinks sectionId={id} reload={reload} loggedIn={loggedIn}></SectionLinks>) }
 						</Stack>
 					</Col>
 				</Row>

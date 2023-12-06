@@ -1,111 +1,121 @@
 import Accordion from 'react-bootstrap/Accordion';
-import { DragDropContext, DropResult, Droppable, ResponderProvided, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import { useState } from 'react';
 
-import LinkJson from './LinkJson';
+import LinkDraggable from './LinkDraggable';
 import grip from './assets/grip-vertical.svg';
 
 import order from './json/order.json';
 import links from './json/links.json';
 import expand from './json/expand.json';
 
-function getSectionById(section_id: string) {
-    return links.data.filter((section) => section.section_id == section_id)[0];
+function getSection(sectionId: string) {
+    return links.data.filter((section) => section.section_id == sectionId)[0];
+}
+
+function getLinkOrder(sectionId: string) {
+    var linkOrder = order.data.link_order.filter((section) => section.section_id == sectionId)[0];
+    if (linkOrder == undefined) {
+        linkOrder = {section_id: sectionId, order: []};
+        
+        // Fill linkOrder.order with default order
+        var sectionLinks = getSection(sectionId);
+        sectionLinks.section_links.forEach((link) => {
+            linkOrder.order.push(link.link_id);
+        });
+
+        // set and return
+        order.data.link_order.push(linkOrder);
+        return linkOrder;
+    }
+    else {
+        return linkOrder;
+    }
+}
+
+function getLink(sectionId: string, linkId: string): {link_id: string, link_name: string, url: string} {
+    var section = links.data.filter((section) => section.section_id == sectionId)[0];
+    if (section == undefined) {
+        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+    }
+
+    var link = section.section_links.filter((link) => link.link_id == linkId)[0];
+    if (link == undefined) {
+        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+    }
+
+    return link;
 }
 
 interface Props {
-    section_id: string,
+    sectionId: string,
     reload: () => any,
-    select: (type: string, value: Array<string>) => any,
-    active?: Boolean
+    loggedIn?: Boolean
 };
 
 
 function SectionLinks(props: Props) {
-    const [items, setItems] = useState(getSectionById(props.section_id).section_links);
+    const [linkOrder, setLinkOrder] = useState(getLinkOrder(props.sectionId).order)
     
-    let activeKey = false;
-    if (props.active == true) activeKey = expand.data.includes(props.section_id);
-
-    const setSelectionSection = (value: any) => {
-        props.select('section', value);
-    };
-
-    const setSelectionLink = (value: any) => {
-        props.select('section link', value);
-    }
-
-    const getLinks = () => {
-        var ordering = order.data.link_order.filter((section) => section.section_id == props.section_id);
-        if (ordering.length == 0 || props.active != true) {
-            // no custom ordering
-            return getSectionById(props.section_id).section_links.map((link) =>
-                <LinkJson section_id={props.section_id} link_id={link.link_id} reload={props.reload} select={setSelectionLink} active={props.active}></LinkJson>
-            );
-        }
-        else {
-            // custom ordering following ./json/order.json
-            return ordering[0].order.map((link_id) => {
-                return (<LinkJson section_id={props.section_id} link_id={link_id} reload={props.reload} select={setSelectionLink} active={props.active}></LinkJson>);
-            });
-        }
-    }
-
     const onDragEnd = (result: DropResult) => {
+        if (result == null || result == undefined) return;
         const { source, destination, draggableId } = result;
         if (!destination) return;
-        const newItems = Array.from(items);
-        const [removed] = newItems.splice(result.source.index, 1);
-        if (result == null || result == undefined) return;
-        newItems.splice(destination.index, 0, removed);
-        setItems(newItems);
+        const newOrder = Array.from(linkOrder);
+        const [removed] = newOrder.splice(result.source.index, 1);
+        newOrder.splice(destination.index, 0, removed);
+        
+        var index = order.data.link_order.indexOf(order.data.link_order.filter((link) => link.section_id == props.sectionId)[0])
+        order.data.link_order[index].order = newOrder;
+        setLinkOrder(newOrder);
     }
 
+    let activeKey = false;
+    if (props.loggedIn == true) activeKey = expand.data.includes(props.sectionId);
+
     return (
-        <>  
+        <>
             <Accordion
                 defaultActiveKey={activeKey ? '0' : '1'}
                 onSelect={() => {
-                    if (props.active != true) return;
+                    if (props.loggedIn != true) return;
 
                     if (activeKey) {
-                        var index = expand.data.indexOf(props.section_id);
+                        var index = expand.data.indexOf(props.sectionId);
                         if (index != 1) {
                             expand.data.splice(index, 1);
                         }
                     }
                     else {
-                        expand.data.push(props.section_id);
+                        expand.data.push(props.sectionId);
                     }
                 }}
             >
                 <Accordion.Item eventKey='0'>
                     <Accordion.Header>
-                        {
-                            props.active ? <>
-                                <img onClick={() => {setSelectionSection([getSectionById(props.section_id).section_id])}} src={grip} alt='' className='grip'
-                                />
-                            </> : ''
-                        }
-                        
-                        {getSectionById(props.section_id).section_name}
+                        <img src={grip} alt='' className='grip'/>
+                        {getSection(props.sectionId).section_name}
                     </Accordion.Header>
-                    <Accordion.Body className={props.active ? 'ps-0' : ''}>
+                    <Accordion.Body className={props.loggedIn ? 'ps-0' : ''}>
                         {/* {getLinks()} */}
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Droppable droppableId={props.section_id}>
+                            <Droppable droppableId={props.sectionId}>
                                 {(provided) => (
-                                    <ul className={props.section_id} {...provided.droppableProps} ref={provided.innerRef}>
-                                        {items.map((item, index) => (
-                                            <Draggable key={item.link_id} draggableId={item.link_id} index={index}>
-                                                {(provided) => (
-                                                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><a href={item.url}>{item.link_name}</a></li>
-                                                    // <LinkJson section_id={props.section_id} link_id={items.link_id} reload={props.reload} select={setSelectionLink} active={props.active}></LinkJson>
-                                                )}
-                                            </Draggable>
-                                        ))}
+                                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                                        {linkOrder.map((linkId, index) => {
+                                            var link = getLink(props.sectionId, linkId)
+                                            return (
+                                                <LinkDraggable
+                                                    key={linkId}
+                                                    sectionId={props.sectionId}
+                                                    link={link}
+                                                    index={index}
+                                                    reload={props.reload}
+                                                />
+                                            );
+                                        })}
                                         {provided.placeholder}
-                                    </ul>
+                                    </div>
                                 )}
                             </Droppable> 
                         </DragDropContext>
