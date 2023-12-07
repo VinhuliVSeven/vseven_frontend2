@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import profile from './assets/profile.png';
 
-import './css/SectionAccount.css'
+import './css/Account.css'
 
 interface Props {
 	state: boolean,
@@ -13,7 +13,7 @@ interface Props {
     reset: () => any
 }   
 
-function SectionAccount(props: Props) {
+function Account(props: Props) {
 
     return (
     <>
@@ -49,4 +49,4 @@ function SectionAccount(props: Props) {
     );
 }
 
-export default SectionAccount;
+export default Account;

@@ -45,7 +45,7 @@ function LinkDraggable(props: Props) {
     };
 
     return (
-        <Draggable draggableId={props.link.link_id} index={props.index}>
+        <Draggable draggableId={'link' + props.link.link_id + 'section' + props.sectionId} index={props.index}>
             {(provided) => {
                 return (
                     <div ref={provided.innerRef} {...provided.draggableProps}>

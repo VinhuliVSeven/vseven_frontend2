@@ -4,14 +4,13 @@ import './css/Link.css';
 
 interface Props {
     name?: string,
-    target?: string,
+    url?: string
 }
 
 function Link(props: Props) {
-
     return (
         <Container>
-            <a href={props.target == null || props.target == '' ? '/' : props.target}>
+            <a href={props.url}>
                 <p className='hanging mb-0'>{props.name}</p>
             </a>
         </Container>

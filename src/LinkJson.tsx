@@ -16,7 +16,7 @@ interface Props {
     section_id: string,
     link_id: string,
     reload: () => any,
-    select: (value: Array<string>) => any,
+    // select: (value: Array<string>) => any,
     active?: Boolean
 }
 
@@ -59,17 +59,13 @@ function LinkJson(props: Props) {
         props.reload();
     };
 
-    const drag = () => {
-        props.select([props.section_id, props.link_id]);
-    }
-
     return (
         <Container>
             <Row>
                 {
                     props.active ? <>
                         <Col md='1' lg='1'>
-                            <img onClick={drag} src={grip} alt='' className='grip'/>
+                            <img src={grip} alt='' className='grip'/>
                         </Col>
                     </> : ''
                 }
