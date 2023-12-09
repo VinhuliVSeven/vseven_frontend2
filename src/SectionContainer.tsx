@@ -20,13 +20,14 @@ function getSection(sectionId: string) {
 
 interface Props {
     sectionId: string,
-    index: number,
     links: {
         linkId: string;
         linkName: string;
         url: string;
     }[],
-    reload: () => any,
+    bookmarks: string[][],
+    setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
+    index: number,
 };
 
 
@@ -58,7 +59,8 @@ function SectionContainer(props: Props) {
                                             key={'sectionlinks' + props.sectionId}
                                             sectionId={props.sectionId}
                                             links={props.links}
-                                            reload={props.reload}
+                                            bookmarks={props.bookmarks}
+                                            setBookmarks={props.setBookmarks}
                                         />
                                     </Card.Body>
                                 </Accordion.Collapse>

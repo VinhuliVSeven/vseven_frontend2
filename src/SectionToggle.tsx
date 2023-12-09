@@ -1,8 +1,6 @@
 import './css/Section.css';
 
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import arrowDown from './assets/caret-down-fill.svg';
 import arrowUp from './assets/caret-up-fill.svg';

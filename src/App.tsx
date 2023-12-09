@@ -103,14 +103,11 @@ function App() {
 
 	const [sectionOrder, setSectionOrder] = useState(orderJson.data.section_order);
 	const [linkOrders, setLinkOrders] = useState(generateLinkOrders());
-
-	const [seed, setSeed] = useState(1);
-	const reload = () => setSeed(Math.random());
+	const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
 
 	const [loggedIn, setLoggedIn] = useState(false);
 	const toggleLoggedIn = () => {
 		setLoggedIn(!loggedIn);
-		reload();
 	}
 
 	const reset = () => {
@@ -118,7 +115,6 @@ function App() {
 		setSectionOrder(orderJson.data.section_order);
 		setLinkOrders(generateLinkOrders());
 		save();
-		reload();
 	}
 
 	const save = () => {
@@ -129,7 +125,6 @@ function App() {
 	const cancel = () => {
 		setSectionOrder(orderJson.data.section_order);
 		setLinkOrders(orderJson.data.link_order);
-		reload();
 	}
 
 	const getLinkOrder = (sectionId: string) => {
@@ -139,7 +134,7 @@ function App() {
 	const onDragEnd = (result: DropResult) => {
         if (result == null || result == undefined) return;
         const { source, destination, draggableId } = result;
-		// console.log(source, destination, draggableId);
+		console.log(source, destination, draggableId);
 
 		if (!destination) return;
 		if (draggableId.startsWith('link')) {
@@ -166,6 +161,20 @@ function App() {
 		}
 	}
 
+	const onDragEndBookmarks = (result: DropResult) => {
+		if (result == null || result == undefined) return;
+        const { source, destination, draggableId } = result;
+		console.log(source, destination, draggableId);
+
+		// bookmark reordering
+		if (!destination) return;
+        const newBookmarks = Array.from(bookmarks);
+        const [removed] = newBookmarks.splice(result.source.index, 1);
+        newBookmarks.splice(destination.index, 0, removed);
+        
+        setBookmarks(newBookmarks);
+	}
+
 	const generateColumns = () => {
 		const columns = [];
 		
@@ -174,16 +183,17 @@ function App() {
 				<Col key={'column' + column}>
 					<Droppable droppableId={'column' + column} type='section'>
 						{(provided) => (
-							<div key={seed + column} {...provided.droppableProps} ref={provided.innerRef}>
+							<div {...provided.droppableProps} ref={provided.innerRef}>
 								{sectionOrder[column].map((sectionId, index) => (
 									loggedIn ?
 									<SectionContainer
 										key={'section' + sectionId}
 										sectionId={sectionId}
-										index={index}
 										links={generateLinksFromOrder(getLinkOrder(sectionId))}
-										reload={reload}
-									/> : <SectionDefault sectionId={sectionId}/>
+										bookmarks={bookmarks}
+										setBookmarks={setBookmarks}
+										index={index}
+									/> : <SectionDefault key={'section' + sectionId} sectionId={sectionId}/>
 								))}
 								{provided.placeholder}
 							</div>
@@ -199,29 +209,34 @@ function App() {
 	return (
 		<>
 			<Header></Header>
-				<Container fluid className='vh-100 d-flex flex-column'>
-					<Row className='h-100'>
-						<Col className='fixed-column bg-dark pt-3'>
-							<Stack gap={3}>
-								<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
-								{
-									loggedIn ? <>
-										<LaunchpadEdit save={save} cancel={cancel}></LaunchpadEdit>
-										<QuickLinks reload={reload} key={seed - 1}></QuickLinks>
-									</> : null
-								}
-								<Frequent></Frequent>
-							</Stack>
-						</Col>
-						<Col>
-							<DragDropContext onDragEnd={onDragEnd}>
-								<Row>
-									{generateColumns()}
-								</Row>
-							</DragDropContext>
-						</Col>
-					</Row>
-				</Container>
+			<Container fluid className='vh-100 d-flex flex-column'>
+				<Row className='h-100'>
+					<Col className='fixed-column bg-dark pt-3'>
+						<Stack gap={3}>
+							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
+							{
+								loggedIn ? <>
+									<LaunchpadEdit save={save} cancel={cancel}></LaunchpadEdit>
+									<DragDropContext onDragEnd={onDragEndBookmarks}>
+										<QuickLinks
+											bookmarks={bookmarks}
+											setBookmarks={setBookmarks}
+										/>
+									</DragDropContext>
+								</> : null
+							}
+							<Frequent></Frequent>
+						</Stack>
+					</Col>
+					<Col>
+						<DragDropContext onDragEnd={onDragEnd}>
+							<Row>
+								{generateColumns()}
+							</Row>
+						</DragDropContext>
+					</Col>
+				</Row>
+			</Container>
 		</>
 	);
 }

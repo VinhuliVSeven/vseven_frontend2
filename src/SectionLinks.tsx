@@ -11,7 +11,8 @@ interface Props {
         linkName: string;
         url: string;
     }[],
-    reload: () => any
+    bookmarks: string[][],
+    setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
 };
 
 function SectionLinks(props: Props) {
@@ -26,8 +27,9 @@ function SectionLinks(props: Props) {
                                     key={'link' + link.linkId}
                                     sectionId={props.sectionId}
                                     link={link}
+                                    bookmarks={props.bookmarks}
+                                    setBookmarks={props.setBookmarks}
                                     index={index}
-                                    reload={props.reload}
                                 />
                             );
                         })}
