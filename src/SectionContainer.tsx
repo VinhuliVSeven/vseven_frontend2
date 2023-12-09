@@ -8,21 +8,22 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import SectionLinks from './SectionLinks';
 import SectionToggle from './SectionToggle';
-import grip from './assets/grip-vertical.svg';
+import handle from './assets/grip-vertical.svg';
+
 
 import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
 
 function getSection(sectionId: string) {
-    return linksJson.data.filter((section) => section.section_id == sectionId)[0];
+    return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
 }
 
 interface Props {
     sectionId: string,
     index: number,
     links: {
-        link_id: string;
-        link_name: string;
+        linkId: string;
+        linkName: string;
         url: string;
     }[],
     reload: () => any,
@@ -41,25 +42,27 @@ function SectionContainer(props: Props) {
                             <Card>
                                 <Card.Header className='section-header'>
                                     <Row className=''>
-                                        <Col sm='1'>
-                                        <img {...provided.dragHandleProps} src={grip} alt='' className='grip'/>
+                                        <Col sm='1' {...provided.dragHandleProps} className='handle-column'>
+                                            <div className="handle-container">
+                                                <img className='handle' src={handle} alt=''/>
+                                            </div>
                                         </Col>
-                                        <Col fluid>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).section_name}</SectionToggle>
+                                        <Col className='ps-0 pe-0'>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).sectionName}</SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>
+                                <Accordion.Collapse eventKey='0'>
+                                    <Card.Body className='section-body'>
+                                        <SectionLinks
+                                            key={'sectionlinks' + props.sectionId}
+                                            sectionId={props.sectionId}
+                                            links={props.links}
+                                            reload={props.reload}
+                                        />
+                                    </Card.Body>
+                                </Accordion.Collapse>
                             </Card>
-                            <Accordion.Collapse eventKey='0'>
-                                <Card.Body className='section-body'>
-                                    <SectionLinks
-                                        key={'sectionlinks' + props.sectionId}
-                                        sectionId={props.sectionId}
-                                        links={props.links}
-                                        reload={props.reload}
-                                    />
-                                </Card.Body>
-                            </Accordion.Collapse>
                         </Accordion>
                         <br/>
                     </div>

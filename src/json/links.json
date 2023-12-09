@@ -1,329 +1,329 @@
 {
 	"data": [
 		{
-			"section_id": "1",
-			"section_name": "Orientation and On-boarding",
-			"section_links": [
+			"sectionId": "1",
+			"sectionName": "Orientation and On-boarding",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "SIS Tutorials",
+					"linkId": "1",
+					"linkName": "SIS Tutorials",
 					"url": ""
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Canvas Tutorial",
+					"linkId": "2",
+					"linkName": "Canvas Tutorial",
 					"url": "https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Important Contacts",
+					"linkId": "3",
+					"linkName": "Important Contacts",
 					"url": "https://vinuniversity.sharepoint.com/sites/HomeSite/SitePages/Contact-Information.aspx"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "VinUni Maps",
+					"linkId": "4",
+					"linkName": "VinUni Maps",
 					"url": "https://vinuni.edu.vn/visit/"
 					
 				},
 				{
-					"link_id": "5",
-					"link_name": "Tuition Fee and Financial Support",
+					"linkId": "5",
+					"linkName": "Tuition Fee and Financial Support",
 					"url": "https://vinuni.edu.vn/undergraduate/tuition-fee-and-financial-support/"
 					
 				}
 			]
 		},
 		{
-			"section_id": "2",
-			"section_name": "Enrollment and Registration",
-			"section_links": [
+			"sectionId": "2",
+			"sectionName": "Enrollment and Registration",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Academic Calender",
+					"linkId": "1",
+					"linkName": "Academic Calender",
 					"url": "https://vinuni.edu.vn/vinuni-academic-calendar/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Curriculum Information",
+					"linkId": "2",
+					"linkName": "Curriculum Information",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#curriculum-information"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Registration and Scheduling",
+					"linkId": "3",
+					"linkName": "Registration and Scheduling",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Scheduling-Resources.aspx"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "Academic Requirements",
+					"linkId": "4",
+					"linkName": "Academic Requirements",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#academic-requirements"
 					
 				}
 			]
 		},
 		{
-			"section_id": "3",
-			"section_name": "Study",
-			"section_links": [
+			"sectionId": "3",
+			"sectionName": "Study",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Classes, Grades, and Evaluation",
+					"linkId": "1",
+					"linkName": "Classes, Grades, and Evaluation",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Classes,-Grades-and-Evaluation.aspx"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Declaring a Major / Minor / Concentration",
+					"linkId": "2",
+					"linkName": "Declaring a Major / Minor / Concentration",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#declaring-a-major-minor-concentration"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Declaring An Individually Designed Concentration",
+					"linkId": "3",
+					"linkName": "Declaring An Individually Designed Concentration",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#declaring-an-individually-designed-concentration-or-minor-(idcm)"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "Guidelines for Program Change Request",
+					"linkId": "4",
+					"linkName": "Guidelines for Program Change Request",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#guidelines-for-program-change-request"
 					
 				},
 				{
-					"link_id": "5",
-					"link_name": "Academic Integrity",
+					"linkId": "5",
+					"linkName": "Academic Integrity",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Academic-Integrity.aspx"
 					
 				}
 			]
 		},
 		{
-			"section_id": "4",
-			"section_name": "Global Exchange Study",
-			"section_links": [
+			"sectionId": "4",
+			"sectionName": "Global Exchange Study",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Global Exchange Information",
+					"linkId": "1",
+					"linkName": "Global Exchange Information",
 					"url": "https://vinuni.edu.vn/global-exchange/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Outbound Student Exchange Procedure",
+					"linkId": "2",
+					"linkName": "Outbound Student Exchange Procedure",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#outbound-student-exchange-program"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Course Exchange Options (Transfer Credit, Proficiency Exam, Independant Study)",
+					"linkId": "3",
+					"linkName": "Course Exchange Options (Transfer Credit, Proficiency Exam, Independant Study)",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registrar-and-Academic.aspx#outbound-student-exchange-program"
 					
 				}
 			]
 		},
 		{
-			"section_id": "5",
-			"section_name": "Research Opportunities",
-			"section_links": [
+			"sectionId": "5",
+			"sectionName": "Research Opportunities",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "AY2022-2023 Seed Grant",
+					"linkId": "1",
+					"linkName": "AY2022-2023 Seed Grant",
 					"url": "https://vinuni.edu.vn/vinuni-research/seed-funding-program/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "VinUni-Illinois Research Funding Program",
+					"linkId": "2",
+					"linkName": "VinUni-Illinois Research Funding Program",
 					"url": "https://smarthealth.vinuni.edu.vn/"
 					
 				}
 			]
 		},
 		{
-			"section_id": "6",
-			"section_name": "Student Support and Resources",
-			"section_links": [
+			"sectionId": "6",
+			"sectionName": "Student Support and Resources",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Regulation & Policies",
+					"linkId": "1",
+					"linkName": "Regulation & Policies",
 					"url": "https://policy.vinuni.edu.vn/academic-affairs/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Personal Information",
+					"linkId": "2",
+					"linkName": "Personal Information",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Transcripts-and-Records.aspx#personal-information"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Privacy Access and Records",
+					"linkId": "3",
+					"linkName": "Privacy Access and Records",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Transcripts-and-Records.aspx#records-privacy-and-access"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "IT Service",
+					"linkId": "4",
+					"linkName": "IT Service",
 					"url": "https://vinuniversity.sharepoint.com/sites/IT/SitePages/IT-Services-for-Students.aspx"
 					
 				},
 				{
-					"link_id": "5",
-					"link_name": "Library",
+					"linkId": "5",
+					"linkName": "Library",
 					"url": "https://library.vinuni.edu.vn/"
 					
 				},
 				{
-					"link_id": "6",
-					"link_name": "Registry Service Forms",
+					"linkId": "6",
+					"linkName": "Registry Service Forms",
 					"url": "https://vinuniversity.sharepoint.com/sites/OfficeofRegistrar/SitePages/Registry-Service-Forms.aspx"
 					
 				},
 				{
-					"link_id": "7",
-					"link_name": "Room Booking",
+					"linkId": "7",
+					"linkName": "Room Booking",
 					"url": "https://library.vinuni.edu.vn/room-booking/"
 					
 				},
 				{
-					"link_id": "8",
-					"link_name": "Student Counseling Service",
+					"linkId": "8",
+					"linkName": "Student Counseling Service",
 					"url": "https://outlook.office365.com/book/HealthandWellbeing@vinuni.edu.vn/?"
 					
 				}
 			]
 		},
 		{
-			"section_id": "7",
-			"section_name": "Student Life",
-			"section_links": [
+			"sectionId": "7",
+			"sectionName": "Student Life",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Our Campus",
+					"linkId": "1",
+					"linkName": "Our Campus",
 					"url": "https://vinuni.edu.vn/our-campus/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Life at VinUni",
+					"linkId": "2",
+					"linkName": "Life at VinUni",
 					"url": "https://vinuni.edu.vn/life-at-vinuni/"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "First Year Experience",
+					"linkId": "3",
+					"linkName": "First Year Experience",
 					"url": "https://vinuni.edu.vn/first-year-experience/"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "Student Clubs & Associations",
+					"linkId": "4",
+					"linkName": "Student Clubs & Associations",
 					"url": "https://vinuni.edu.vn/student-clubs-and-associations/"
 					
 				},
 				{
-					"link_id": "5",
-					"link_name": "Heath and Wellbeing",
+					"linkId": "5",
+					"linkName": "Heath and Wellbeing",
 					"url": "https://vinuniversity.sharepoint.com/sites/VinUniStudentsSite2/SitePages/Health-and-Wellbeing.aspx"
 					
 				},
 				{
-					"link_id": "6",
-					"link_name": "Lost & Found",
+					"linkId": "6",
+					"linkName": "Lost & Found",
 					"url": "https://vinuniversity.sharepoint.com/sites/VinUniStudentsSite2/SitePages/LOST-%26-FOUND.aspx"
 					
 				},
 				{
-					"link_id": "7",
-					"link_name": "Guest Visit Request",
-					"url": "https://forms.office.com/Pages/ResponsePage.aspx?link_id=iSf4WJVmSk-r2zV2aNVc_4LJoD-CFhJHiHKzJB8C2mxUOTc0QTc0TUc1VjA1S1VMUzUxUVkwSU9SVC4u"
+					"linkId": "7",
+					"linkName": "Guest Visit Request",
+					"url": "https://forms.office.com/Pages/ResponsePage.aspx?linkId=iSf4WJVmSk-r2zV2aNVc_4LJoD-CFhJHiHKzJB8C2mxUOTc0QTc0TUc1VjA1S1VMUzUxUVkwSU9SVC4u"
 					
 				},
 				{
-					"link_id": "8",
-					"link_name": "Re-issue Student link_id Card",
-					"url": "https://vinuniversity.sharepoint.com/sites/VinUniStudentsSite2/Shared%20Documents/Forms/AllItems.aspx?link_id=%2Fsites%2FVinUniStudentsSite2%2FShared%20Documents%2FAdministrative%20Support%2FProcedures%20after%20losing%20student%20card%2Epdf&parent=%2Fsites%2FVinUniStudentsSite2%2FShared%20Documents%2FAdministrative%20Support"
+					"linkId": "8",
+					"linkName": "Re-issue Student ID Card",
+					"url": "https://vinuniversity.sharepoint.com/sites/VinUniStudentsSite2/Shared%20Documents/Forms/AllItems.aspx?linkId=%2Fsites%2FVinUniStudentsSite2%2FShared%20Documents%2FAdministrative%20Support%2FProcedures%20after%20losing%20student%20card%2Epdf&parent=%2Fsites%2FVinUniStudentsSite2%2FShared%20Documents%2FAdministrative%20Support"
 					
 				},
 				{
-					"link_id": "9",
-					"link_name": "Meet VinUnians",
+					"linkId": "9",
+					"linkName": "Meet VinUnians",
 					"url": "https://vinuni.edu.vn/meet-vinunians/"
 				}
 			]
 		},
 		{
-			"section_id": "8",
-			"section_name": "Career Management",
-			"section_links": [
+			"sectionId": "8",
+			"sectionName": "Career Management",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "Career Services",
+					"linkId": "1",
+					"linkName": "Career Services",
 					"url": "https://vinuni.edu.vn/career-services/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Career Connect",
+					"linkId": "2",
+					"linkName": "Career Connect",
 					"url": "https://jobs.vinuni.edu.vn/"
 					
 				},
 				{
-					"link_id": "3",
-					"link_name": "Career Readiness Topics",
+					"linkId": "3",
+					"linkName": "Career Readiness Topics",
 					"url": "https://vinuniversity.sharepoint.com/sites/VinUniStudentsSite2/SitePages/Career-Readiness-2021-2022.aspx"
 					
 				},
 				{
-					"link_id": "4",
-					"link_name": "VinUniversity's Strategic Collaborators",
+					"linkId": "4",
+					"linkName": "VinUniversity's Strategic Collaborators",
 					"url": "https://vinuni.edu.vn/about-vinuniversity/strategic-collaborators-and-partners/"
 					
 				},
 				{
-					"link_id": "5",
-					"link_name": "Job Opportunities",
+					"linkId": "5",
+					"linkName": "Job Opportunities",
 					"url": "https://vinuni.edu.vn/job-opportunities/"
 					
 				}
 			]
 		},
 		{
-			"section_id": "9",
-			"section_name": "Start-up and Entrepreneurship",
-			"section_links": [
+			"sectionId": "9",
+			"sectionName": "Start-up and Entrepreneurship",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "VinUni Entrepreneurship Lab",
+					"linkId": "1",
+					"linkName": "VinUni Entrepreneurship Lab",
 					"url": "https://smarthealth.vinuni.edu.vn/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "VinUniversity's Partners",
+					"linkId": "2",
+					"linkName": "VinUniversity's Partners",
 					"url": "https://eship.vinuni.edu.vn/start-up-internship/"
 					
 				}
 			]
 		},
 		{
-			"section_id": "10",
-			"section_name": "Keep-in-touch",
-			"section_links": [
+			"sectionId": "10",
+			"sectionName": "Keep-in-touch",
+			"sectionLinks": [
 				{
-					"link_id": "1",
-					"link_name": "General Enquiries",
+					"linkId": "1",
+					"linkName": "General Enquiries",
 					"url": "https://vinuni.edu.vn/contact/"
 					
 				},
 				{
-					"link_id": "2",
-					"link_name": "Alumni Network",
+					"linkId": "2",
+					"linkName": "Alumni Network",
 					"url": ""
 					
 				}

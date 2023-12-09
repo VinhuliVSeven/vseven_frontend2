@@ -18,7 +18,6 @@ import LaunchpadEdit from './LaunchpadEdit';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
-import SectionContainer2 from './SectionContainer';
 import SectionDefault from './SectionDefault';
 
 import orderJson from './json/order.json';
@@ -27,40 +26,41 @@ import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
 
 function resetData() {
-	orderJson.data.section_order = orderJson.data.section_order_default;
-	orderJson.data.link_order = [{section_id: '', order: []}]
+	orderJson.data.section_order = orderJson.data.sectionOrderDefault;
+	orderJson.data.link_order = [{sectionId: '', order: []}]
 	bookmarksJson.data = [['', '']];
 	bookmarksJson.data.splice(0, 1);
 	expandJson.data = [''];
+	expandJson.data.splice(0, 1);
 }
 
 function getSection(sectionId: string) {
-    return linksJson.data.filter((section) => section.section_id == sectionId)[0];
+    return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
 }
 
-function getLink(sectionId: string, linkId: string): {link_id: string, link_name: string, url: string} {
-    var section = linksJson.data.filter((section) => section.section_id == sectionId)[0];
+function getLink(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
+    var section = linksJson.data.filter((section) => section.sectionId == sectionId)[0];
     if (section == undefined) {
-        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
     }
 
-    var link = section.section_links.filter((link) => link.link_id == linkId)[0];
+    var link = section.sectionLinks.filter((link) => link.linkId == linkId)[0];
     if (link == undefined) {
-        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
     }
 
     return link;
 }
 
-function generateLinksFromOrder(linkOrder: {section_id: string, order: string[]}) {
-	var links: {link_id: string, link_name: string, url: string}[] = [];
+function generateLinksFromOrder(linkOrder: {sectionId: string, order: string[]}) {
+	var links: {linkId: string, linkName: string, url: string}[] = [];
 	if (linkOrder == null || linkOrder == undefined) return links;
-	var section = getSection(linkOrder.section_id);
+	var section = getSection(linkOrder.sectionId);
 	if (section == null || section == undefined) return links;
 
 	
 	linkOrder.order.forEach((linkId) => {
-		links.push(getLink(linkOrder.section_id, linkId));
+		links.push(getLink(linkOrder.sectionId, linkId));
 	});
 
 	return links;
@@ -69,25 +69,25 @@ function generateLinksFromOrder(linkOrder: {section_id: string, order: string[]}
 function generateLinkOrders() {
 	var remaining: string[] = [];
 	linksJson.data.forEach((section) => {
-		remaining.push(section.section_id);
+		remaining.push(section.sectionId);
 	});
 
-	var linkOrders: { section_id: string; order: string[]; }[] = [];
+	var linkOrders: { sectionId: string; order: string[]; }[] = [];
 	orderJson.data.link_order.forEach((linkOrder) => {
 		linkOrders.push(linkOrder);
-		var index = remaining.indexOf(linkOrder.section_id, 0);
+		var index = remaining.indexOf(linkOrder.sectionId, 0);
 		if (index != -1) {
 			remaining.splice(index, 1);
 		}
 	});
 
 	remaining.forEach((sectionId) => {
-		var linkOrder: {section_id: string, order: string[]} = {section_id: sectionId, order: []};
+		var linkOrder: {sectionId: string, order: string[]} = {sectionId: sectionId, order: []};
         
         // Fill with default order
         var sectionLinks = getSection(sectionId);
-        sectionLinks.section_links.forEach((link) => {
-            linkOrder.order.push(link.link_id);
+        sectionLinks.sectionLinks.forEach((link) => {
+            linkOrder.order.push(link.linkId);
         });
 
         linkOrders.push(linkOrder);
@@ -133,7 +133,7 @@ function App() {
 	}
 
 	const getLinkOrder = (sectionId: string) => {
-		return linkOrders.filter((section) => section.section_id == sectionId)[0];
+		return linkOrders.filter((section) => section.sectionId == sectionId)[0];
 	}
 
 	const onDragEnd = (result: DropResult) => {
@@ -145,7 +145,7 @@ function App() {
 		if (draggableId.startsWith('link')) {
 			// link reordering
 			const sectionId = Number(source.droppableId.replace('section', ''));
-			const index = linkOrders.findIndex((linkOrder) => linkOrder.section_id == String(sectionId));
+			const index = linkOrders.findIndex((linkOrder) => linkOrder.sectionId == String(sectionId));
 
 			const newLinkOrders = Array.from(linkOrders);
 			const [removed] = newLinkOrders[index].order.splice(result.source.index, 1);
@@ -177,7 +177,7 @@ function App() {
 							<div key={seed + column} {...provided.droppableProps} ref={provided.innerRef}>
 								{sectionOrder[column].map((sectionId, index) => (
 									loggedIn ?
-									<SectionContainer2
+									<SectionContainer
 										key={'section' + sectionId}
 										sectionId={sectionId}
 										index={index}

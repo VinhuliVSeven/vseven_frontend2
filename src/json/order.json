@@ -1,6 +1,6 @@
 {
     "data": {
-        "section_order_default": [
+        "sectionOrderDefault": [
             [
                 "1",
                 "2",
@@ -42,11 +42,11 @@
         ],
         "link_order": [
             {
-                "section_id": "",
+                "sectionId": "",
                 "order": []
             },
             {
-                "section_id": "1",
+                "sectionId": "1",
                 "order": ["3", "2", "5", "4", "1", "6"]
             }
         ]

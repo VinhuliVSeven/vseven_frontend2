@@ -13,46 +13,46 @@ import bookmarks from './json/bookmarks.json';
 
 
 interface Props {
-    section_id: string,
-    link_id: string,
+    sectionId: string,
+    linkId: string,
     reload: () => any,
     // select: (value: Array<string>) => any,
     active?: Boolean
 }
 
-function getSectionById(section_id: string) {
-    return links.data.filter((section) => section_id == section.section_id)[0];
+function getSectionById(sectionId: string) {
+    return links.data.filter((section) => sectionId == section.sectionId)[0];
 }
 
-function getLinkById(section_id: string, link_id: string) {
-    var links = getSectionById(section_id).section_links.filter((link) => link.link_id == link_id);
+function getLinkById(sectionId: string, linkId: string) {
+    var links = getSectionById(sectionId).sectionLinks.filter((link) => link.linkId == linkId);
     if (links.length == 0) {
         return {
-            "link_id": link_id,
-            "link_name": "<<LINK DOES NOT EXIST>>",
+            "linkId": linkId,
+            "linkName": "<<LINK DOES NOT EXIST>>",
             "url": "/"
         }
     }
-    return getSectionById(section_id).section_links.filter((link) => link.link_id == link_id)[0];
+    return getSectionById(sectionId).sectionLinks.filter((link) => link.linkId == linkId)[0];
 }
 
-function checkBookmark(section_id: string, link_id: string) {
-    return bookmarks.data.filter((link) => section_id == link[0] && link_id == link[1])[0] != null ? true : false;
+function checkBookmark(sectionId: string, linkId: string) {
+    return bookmarks.data.filter((link) => sectionId == link[0] && linkId == link[1])[0] != null ? true : false;
 }
 
 function LinkJson(props: Props) {
-    const [bookmarked, setBookmarked] = useState(checkBookmark(props.section_id, props.link_id));
+    const [bookmarked, setBookmarked] = useState(checkBookmark(props.sectionId, props.linkId));
 	const toggleBookmarked = () => {
         if (bookmarked) {
             for (var i = 0; i < bookmarks.data.length; i++) {
-                if (bookmarks.data[i][0] == props.section_id && bookmarks.data[i][1] == props.link_id) {
+                if (bookmarks.data[i][0] == props.sectionId && bookmarks.data[i][1] == props.linkId) {
                     bookmarks.data.splice(i, 1);
                     break;
                 }
             }
         }
         else {
-            bookmarks.data.push([props.section_id, props.link_id]);
+            bookmarks.data.push([props.sectionId, props.linkId]);
         }
 
         setBookmarked(!bookmarked);
@@ -70,8 +70,8 @@ function LinkJson(props: Props) {
                     </> : ''
                 }
                 <Col md lg>
-                    <a href={getLinkById(props.section_id, props.link_id).url}>
-                        <p className='hanging mb-0'>{getLinkById(props.section_id, props.link_id).link_name}</p>
+                    <a href={getLinkById(props.sectionId, props.linkId).url}>
+                        <p className='hanging mb-0'>{getLinkById(props.sectionId, props.linkId).linkName}</p>
                     </a>
                 </Col>
                 {

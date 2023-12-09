@@ -9,15 +9,15 @@ import Link from './Link';
 import linksJson from './json/links.json';
 
 function getSection(sectionId: string) {
-    return linksJson.data.filter((section) => section.section_id == sectionId)[0];
+    return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
 }
 
 function generateLinks(sectionId: string) {
     var links: JSX.Element[] = [];
 
-    getSection(sectionId).section_links.forEach((link) => {
+    getSection(sectionId).sectionLinks.forEach((link) => {
         links.push(
-            <Link key={link.link_id} name={link.link_name} url={link.url}/>
+            <Link key={link.linkId} name={link.linkName} url={link.url}/>
         );
     })
 
@@ -36,17 +36,17 @@ function SectionDefault(props: Props) {
                 <Card>
                     <Card.Header className='section-header'>
                         <Row className=''>
-                            <Col md='12'>
-                                <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).section_name}</SectionToggle>
+                            <Col className='ps-0 pe-0'>
+                                <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).sectionName}</SectionToggle>
                             </Col>
                         </Row>
                     </Card.Header>
+                    <Accordion.Collapse eventKey='0'>
+                        <Card.Body className=''>
+                            {generateLinks(props.sectionId)}
+                        </Card.Body>
+                    </Accordion.Collapse>
                 </Card>
-                <Accordion.Collapse eventKey='0'>
-                    <Card.Body className='section-body'>
-                        {generateLinks(props.sectionId)}
-                    </Card.Body>
-                </Accordion.Collapse>
             </Accordion>
             <br/>
         </>

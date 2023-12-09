@@ -6,19 +6,72 @@
 .accordion-toggle {
     border-color: transparent;
     background-color: transparent;
+    
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
 
 .accordion-toggle span {
     color: black
 }
 
+.accordion-toggle table {
+    display: block;
+    width: 100%;
+}
+
+.accordion-toggle td {
+    vertical-align: middle;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.accordion-toggle .title-column {
+    text-align: center;
+    width: 100%;
+}
+
+.accordion-toggle .arrow-column {
+    width: 16px;
+}
+
 .section-header {
     margin-left: 0px;
     margin-right: 0px;
+    padding-left: 12px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .section-body {
-    padding-top: 4px;
-    padding-left: 5px;
-    padding-right: 8px;
+    padding-top: 15px;
+    padding-left: 0px;
+    padding-right: 14px;
+}
+
+.arrow {
+    padding-right: 2px;
+    float: right;
+}
+
+.handle-column {
+    overflow: hidden;
+    position: relative;
+}
+
+.handle-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.handle {
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
 }

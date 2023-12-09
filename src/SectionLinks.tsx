@@ -7,8 +7,8 @@ import './css/Section.css';
 interface Props {
     sectionId: string,
     links: {
-        link_id: string;
-        link_name: string;
+        linkId: string;
+        linkName: string;
         url: string;
     }[],
     reload: () => any
@@ -23,7 +23,7 @@ function SectionLinks(props: Props) {
                         {props.links.map((link, index) => {
                             return (
                                 <LinkDraggable
-                                    key={'link' + link.link_id}
+                                    key={'link' + link.linkId}
                                     sectionId={props.sectionId}
                                     link={link}
                                     index={index}

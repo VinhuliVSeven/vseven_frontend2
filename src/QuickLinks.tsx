@@ -7,15 +7,15 @@ import LinkDraggable from './LinkDraggable';
 import bookmarksJson from './json/bookmarks.json'
 import linksJson from './json/links.json';
 
-function getLink(sectionId: string, linkId: string): {link_id: string, link_name: string, url: string} {
-    var section = linksJson.data.filter((section) => section.section_id == sectionId)[0];
+function getLink(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
+    var section = linksJson.data.filter((section) => section.sectionId == sectionId)[0];
     if (section == undefined) {
-        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
     }
 
-    var link = section.section_links.filter((link) => link.link_id == linkId)[0];
+    var link = section.sectionLinks.filter((link) => link.linkId == linkId)[0];
     if (link == undefined) {
-        return {link_id: linkId, link_name: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
     }
 
     return link;

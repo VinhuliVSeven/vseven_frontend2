@@ -13,31 +13,31 @@ import bookmarks from './json/bookmarks.json';
 interface Props {
     sectionId: string,
     link: {
-        link_id: string;
-        link_name: string;
+        linkId: string;
+        linkName: string;
         url: string;
     },
     index: number,
     reload: () => any
 }
 
-function checkBookmark(section_id: string, link_id: string) {
-    return bookmarks.data.filter((link) => section_id == link[0] && link_id == link[1])[0] != null ? true : false;
+function checkBookmark(sectionId: string, linkId: string) {
+    return bookmarks.data.filter((link) => sectionId == link[0] && linkId == link[1])[0] != null ? true : false;
 }
 
 function LinkDraggable(props: Props) {
-    const [bookmarked, setBookmarked] = useState(checkBookmark(props.sectionId, props.link.link_id));
+    const [bookmarked, setBookmarked] = useState(checkBookmark(props.sectionId, props.link.linkId));
 	const toggleBookmarked = () => {
         if (bookmarked) {
             for (var i = 0; i < bookmarks.data.length; i++) {
-                if (bookmarks.data[i][0] == props.sectionId && bookmarks.data[i][1] == props.link.link_id) {
+                if (bookmarks.data[i][0] == props.sectionId && bookmarks.data[i][1] == props.link.linkId) {
                     bookmarks.data.splice(i, 1);
                     break;
                 }
             }
         }
         else {
-            bookmarks.data.push([props.sectionId, props.link.link_id]);
+            bookmarks.data.push([props.sectionId, props.link.linkId]);
         }
 
         setBookmarked(!bookmarked);
@@ -45,7 +45,7 @@ function LinkDraggable(props: Props) {
     };
 
     return (
-        <Draggable draggableId={'link' + props.link.link_id + 'section' + props.sectionId} index={props.index}>
+        <Draggable draggableId={'link' + props.link.linkId + 'section' + props.sectionId} index={props.index}>
             {(provided) => {
                 return (
                     <div ref={provided.innerRef} {...provided.draggableProps}>
@@ -56,7 +56,7 @@ function LinkDraggable(props: Props) {
                                 </Col>
                                 <Col md lg>
                                     <a href={props.link.url}>
-                                        <p className='hanging mb-0'>{props.link.link_name}</p>
+                                        <p className='hanging mb-0'>{props.link.linkName}</p>
                                     </a>
                                 </Col>
                                 <Col md='2' lg='1'>
