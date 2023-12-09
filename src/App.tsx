@@ -99,7 +99,7 @@ function generateLinkOrders() {
 
 function App() {
 	useEffect(() => {
-		reset();
+		resetJson();
 	}, []);
 
 	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
@@ -234,7 +234,7 @@ function App() {
 							<Frequent></Frequent>
 						</Stack>
 					</Col>
-					<Col>
+					<Col className='pt-3'>
 						<DragDropContext onDragEnd={onDragEnd}>
 							<Row>
 								{generateColumns()}
