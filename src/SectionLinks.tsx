@@ -2,6 +2,8 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import LinkDraggable from './LinkDraggable';
 
+import './css/Section.css';
+
 interface Props {
     sectionId: string,
     links: {

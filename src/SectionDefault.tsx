@@ -1,5 +1,9 @@
 import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
+import SectionToggle from './SectionToggle';
 import Link from './Link';
 
 import linksJson from './json/links.json';
@@ -28,15 +32,21 @@ interface Props {
 function SectionDefault(props: Props) {
     return (
         <>
-            <Accordion>
-                <Accordion.Item eventKey='0'>
-                    <Accordion.Header>
-                        {getSection(props.sectionId).section_name}
-                    </Accordion.Header>
-                    <Accordion.Body>
+            <Accordion defaultActiveKey={'1'}>
+                <Card>
+                    <Card.Header className='section-header'>
+                        <Row className=''>
+                            <Col md='12'>
+                                <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).section_name}</SectionToggle>
+                            </Col>
+                        </Row>
+                    </Card.Header>
+                </Card>
+                <Accordion.Collapse eventKey='0'>
+                    <Card.Body className='section-body'>
                         {generateLinks(props.sectionId)}
-                    </Accordion.Body>
-                </Accordion.Item>
+                    </Card.Body>
+                </Accordion.Collapse>
             </Accordion>
             <br/>
         </>

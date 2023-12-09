@@ -1,9 +1,14 @@
 import './css/Section.css';
 
 import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { Draggable } from 'react-beautiful-dnd';
 
 import SectionLinks from './SectionLinks';
+import SectionToggle from './SectionToggle';
+import grip from './assets/grip-vertical.svg';
 
 import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
@@ -32,35 +37,29 @@ function SectionContainer(props: Props) {
             <Draggable draggableId={'section' + props.sectionId} index={props.index}>
                 {(provided) => (
                     <div ref={provided.innerRef} {...provided.draggableProps}>
-                        <Accordion
-                            defaultActiveKey={expanded ? '0' : '1'}
-                            onSelect={() => {
-                                if (expanded) {
-                                    var index = expandJson.data.indexOf(props.sectionId);
-                                    if (index != 1) {
-                                        expandJson.data.splice(index, 1);
-                                    }
-                                }
-                                else {
-                                    expandJson.data.push(props.sectionId);
-                                }
-                            }}
-                        >
-                            <Accordion.Item eventKey='0'>
-                                <Accordion.Header>
-                                    {/* <img src={grip} alt='' className='grip'/> */}
-                                    {getSection(props.sectionId).section_name}
-                                </Accordion.Header>
-                                <Accordion.Body className={'ps-0'}>
-                                    <p {...provided.dragHandleProps}>drag and drop</p>
+                        <Accordion defaultActiveKey={expanded ? '0' : '1'}>
+                            <Card>
+                                <Card.Header className='section-header'>
+                                    <Row className=''>
+                                        <Col md='1'>
+                                        <img {...provided.dragHandleProps} src={grip} alt='' className='grip'/>
+                                        </Col>
+                                        <Col md='11'>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).section_name}</SectionToggle>
+                                        </Col>
+                                    </Row>
+                                </Card.Header>
+                            </Card>
+                            <Accordion.Collapse eventKey='0'>
+                                <Card.Body className='section-body'>
                                     <SectionLinks
                                         key={'sectionlinks' + props.sectionId}
                                         sectionId={props.sectionId}
                                         links={props.links}
                                         reload={props.reload}
                                     />
-                                </Accordion.Body>
-                            </Accordion.Item>
+                                </Card.Body>
+                            </Accordion.Collapse>
                         </Accordion>
                         <br/>
                     </div>

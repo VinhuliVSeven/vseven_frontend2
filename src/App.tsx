@@ -18,6 +18,7 @@ import LaunchpadEdit from './LaunchpadEdit';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
+import SectionContainer2 from './SectionContainer';
 import SectionDefault from './SectionDefault';
 
 import orderJson from './json/order.json';
@@ -176,7 +177,7 @@ function App() {
 							<div key={seed + column} {...provided.droppableProps} ref={provided.innerRef}>
 								{sectionOrder[column].map((sectionId, index) => (
 									loggedIn ?
-									<SectionContainer
+									<SectionContainer2
 										key={'section' + sectionId}
 										sectionId={sectionId}
 										index={index}
