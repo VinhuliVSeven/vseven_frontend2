@@ -41,10 +41,10 @@ function SectionContainer(props: Props) {
                             <Card>
                                 <Card.Header className='section-header'>
                                     <Row className=''>
-                                        <Col md='1'>
+                                        <Col sm='1'>
                                         <img {...provided.dragHandleProps} src={grip} alt='' className='grip'/>
                                         </Col>
-                                        <Col md='11'>
+                                        <Col fluid>
                                             <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).section_name}</SectionToggle>
                                         </Col>
                                     </Row>
