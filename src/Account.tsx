@@ -38,7 +38,7 @@ function Account(props: Props) {
                     </> : null
                 }
                 {
-                    props.state ? null : <Button className='' variant='primary' onClick={props.setState}>Sign In</Button>
+                    props.state ? null : <Button className='button' variant='primary' onClick={props.setState}>Sign In</Button>
                 }
                 
             </Card.Body>
