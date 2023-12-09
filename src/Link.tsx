@@ -9,7 +9,7 @@ interface Props {
 
 function Link(props: Props) {
     return (
-        <Container>
+        <Container className='link link-default'>
             <a href={props.url}>
                 <p className='hanging mb-0'>{props.name}</p>
             </a>

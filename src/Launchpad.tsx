@@ -8,15 +8,15 @@ interface Props {
     cancel: () => any
 }
 
-function LaunchpadEdit(props: Props) {
+function Launchpad(props: Props) {
 
     return (
     <>
         <Card>
             <Card.Header as='h6'>Launchpad Edit</Card.Header>
             <Card.Body>
-                <Button className='' variant='success' onClick={props.save}>Save</Button>{' '}
-                <Button className='' variant='secondary' onClick={props.cancel}>Cancel</Button>{' '}
+                <Button className='button' variant='success' onClick={props.save}>Save</Button>{' '}
+                <Button className='button' variant='secondary' onClick={props.cancel}>Cancel</Button>{' '}
             </Card.Body>
         </Card>
         
@@ -25,4 +25,4 @@ function LaunchpadEdit(props: Props) {
     );
 }
 
-export default LaunchpadEdit;
+export default Launchpad;

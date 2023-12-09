@@ -14,20 +14,21 @@ import Col from 'react-bootstrap/Col';
 
 import Header from "./Header";
 import Account from './Account';
-import LaunchpadEdit from './LaunchpadEdit';
+import Launchpad from './Launchpad';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
 import SectionDefault from './SectionDefault';
 
-import orderJson from './json/order.json';
+import orderSectionJson from './json/order_section.json';
+import orderSectionDefaultJson from './json/order_section_default.json';
+import orderLink from './json/order_link.json';
 import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
 
-function resetData() {
-	orderJson.data.section_order = orderJson.data.sectionOrderDefault;
-	orderJson.data.link_order = [{sectionId: '', order: []}]
+function resetJson() {
+	orderLink.data = [{sectionId: '', order: []}];
 	bookmarksJson.data = [['', '']];
 	bookmarksJson.data.splice(0, 1);
 	expandJson.data = [''];
@@ -73,7 +74,7 @@ function generateLinkOrders() {
 	});
 
 	var linkOrders: { sectionId: string; order: string[]; }[] = [];
-	orderJson.data.link_order.forEach((linkOrder) => {
+	orderLink.data.forEach((linkOrder) => {
 		linkOrders.push(linkOrder);
 		var index = remaining.indexOf(linkOrder.sectionId, 0);
 		if (index != -1) {
@@ -101,7 +102,7 @@ function App() {
 		reset();
 	}, []);
 
-	const [sectionOrder, setSectionOrder] = useState(orderJson.data.section_order);
+	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
 	const [linkOrders, setLinkOrders] = useState(generateLinkOrders());
 	const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
 
@@ -111,20 +112,23 @@ function App() {
 	}
 
 	const reset = () => {
-		resetData();
-		setSectionOrder(orderJson.data.section_order);
+		// ???????????????? ↓↓↓↓
+		// setSectionOrder(sectionOrderDefault);
+		// ???????????????? ↑↑↑↑
 		setLinkOrders(generateLinkOrders());
-		save();
+		setBookmarks([]);
 	}
 
 	const save = () => {
-		orderJson.data.section_order = sectionOrder;
-		orderJson.data.link_order = linkOrders;
+		orderSectionJson.data = sectionOrder;
+		orderLink.data = linkOrders;
+		bookmarksJson.data = bookmarks;
 	}
 
-	const cancel = () => {
-		setSectionOrder(orderJson.data.section_order);
-		setLinkOrders(orderJson.data.link_order);
+	const load = () => {
+		setSectionOrder(orderSectionJson.data);
+		setLinkOrders(generateLinkOrders());
+		setBookmarks(bookmarksJson.data);
 	}
 
 	const getLinkOrder = (sectionId: string) => {
@@ -184,17 +188,19 @@ function App() {
 					<Droppable droppableId={'column' + column} type='section'>
 						{(provided) => (
 							<div {...provided.droppableProps} ref={provided.innerRef}>
-								{sectionOrder[column].map((sectionId, index) => (
-									loggedIn ?
-									<SectionContainer
-										key={'section' + sectionId}
-										sectionId={sectionId}
-										links={generateLinksFromOrder(getLinkOrder(sectionId))}
-										bookmarks={bookmarks}
-										setBookmarks={setBookmarks}
-										index={index}
-									/> : <SectionDefault key={'section' + sectionId} sectionId={sectionId}/>
-								))}
+								{loggedIn ? sectionOrder[column].map((sectionId, index) => (
+										<SectionContainer
+											key={'section' + sectionId}
+											sectionId={sectionId}
+											links={generateLinksFromOrder(getLinkOrder(sectionId))}
+											bookmarks={bookmarks}
+											setBookmarks={setBookmarks}
+											index={index}
+										/> 
+									)) : orderSectionDefaultJson.data[column].map((sectionId) => (
+										<SectionDefault key={'section' + sectionId} sectionId={sectionId}/>
+									))
+								}
 								{provided.placeholder}
 							</div>
 						)}
@@ -216,7 +222,7 @@ function App() {
 							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
 							{
 								loggedIn ? <>
-									<LaunchpadEdit save={save} cancel={cancel}></LaunchpadEdit>
+									<Launchpad save={save} cancel={load}></Launchpad>
 									<DragDropContext onDragEnd={onDragEndBookmarks}>
 										<QuickLinks
 											bookmarks={bookmarks}

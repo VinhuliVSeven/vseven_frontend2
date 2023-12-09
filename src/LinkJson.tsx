@@ -60,7 +60,7 @@ function LinkJson(props: Props) {
     };
 
     return (
-        <Container>
+        <Container className='link'>
             <Row>
                 {
                     props.active ? <>

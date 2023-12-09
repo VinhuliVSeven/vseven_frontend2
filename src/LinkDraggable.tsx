@@ -45,29 +45,32 @@ function LinkDraggable(props: Props) {
     };
 
     return (
-        <Draggable draggableId={'link' + props.link.linkId + 'section' + props.sectionId} index={props.index}>
-            {(provided) => {
-                return (
-                    <div ref={provided.innerRef} {...provided.draggableProps}>
-                        <Container>
-                            <Row>
-                                <Col md='1' lg='1'>
-                                    <img src={grip} alt='' className='grip' {...provided.dragHandleProps}/>
-                                </Col>
-                                <Col md lg>
-                                    <a href={props.link.url}>
-                                        <p className='hanging mb-0'>{props.link.linkName}</p>
-                                    </a>
-                                </Col>
-                                <Col md='2' lg='1'>
-                                    <img onClick={toggleBookmarked} src={checkBookmark(props.sectionId, props.link.linkId) ? bookmark_fill : bookmark} alt="Bookmark" className='bookmark float-right'/>
-                                </Col>
-                            </Row>   
-                        </Container>
-                    </div>
-                );
-            }}
-        </Draggable>
+        <Container className='link'>
+            <Draggable draggableId={'link' + props.link.linkId + 'section' + props.sectionId} index={props.index}>
+                {(provided) => {
+                    return (
+                        <div ref={provided.innerRef} {...provided.draggableProps}>
+                            <Container>
+                                <Row>
+                                    <Col md='1' lg='1'>
+                                        <img src={grip} alt='' className='grip' {...provided.dragHandleProps}/>
+                                    </Col>
+                                    <Col md lg>
+                                        <a href={props.link.url}>
+                                            <p className='hanging mb-0'>{props.link.linkName}</p>
+                                        </a>
+                                    </Col>
+                                    <Col md='2' lg='1'>
+                                        <img onClick={toggleBookmarked} src={checkBookmark(props.sectionId, props.link.linkId) ? bookmark_fill : bookmark} alt="Bookmark" className='bookmark float-right'/>
+                                    </Col>
+                                </Row>   
+                            </Container>
+                        </div>
+                    );
+                }}
+            </Draggable>
+        </Container>
+        
     );
 }
 
