@@ -27,6 +27,7 @@ interface Props {
     }[],
     bookmarks: string[][],
     setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
+    loggedIn: Boolean,
     index: number,
 };
 
@@ -49,7 +50,7 @@ function SectionContainer(props: Props) {
                                             </div>
                                         </Col>
                                         <Col className='ps-0 pe-0'>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0'>{getSection(props.sectionId).sectionName}</SectionToggle>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{getSection(props.sectionId).sectionName}</SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>

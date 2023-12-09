@@ -10,13 +10,16 @@ import expandJson from './json/expand.json'
 interface Props {
     children?: React.ReactNode,
     sectionId: string,
-    eventKey: string
+    eventKey: string,
+    loggedIn: Boolean,
 }
 
 function SectionToggle(props: Props) {
     const expanded = expandJson.data.includes(props.sectionId);
 
     const decoratedOnClick = useAccordionButton(props.eventKey, () => {
+        if (!props.loggedIn) return;
+        
         if (expanded) {
             var index = expandJson.data.indexOf(props.sectionId);
             if (index != 1) {

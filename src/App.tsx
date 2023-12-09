@@ -100,6 +100,7 @@ function generateLinkOrders() {
 function App() {
 	useEffect(() => {
 		resetJson();
+		reset();
 	}, []);
 
 	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
@@ -196,9 +197,10 @@ function App() {
 											bookmarks={bookmarks}
 											setBookmarks={setBookmarks}
 											index={index}
+											loggedIn={loggedIn}
 										/> 
 									)) : orderSectionDefaultJson.data[column].map((sectionId) => (
-										<SectionDefault key={'section' + sectionId} sectionId={sectionId}/>
+										<SectionDefault key={'section' + sectionId} sectionId={sectionId} loggedIn={loggedIn}/>
 									))
 								}
 								{provided.placeholder}
