@@ -8,7 +8,7 @@ import logo from './assets/logo.png';
 function Header() {
     return (
         <>
-            <Navbar className='bg-body-tertiary'>
+            <Navbar className='bg-body-tertiary navbar'>
                 <Container fluid>
                     <Navbar.Brand>
                         <img 

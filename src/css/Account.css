@@ -19,11 +19,14 @@
 }
 
 .overflow:hover{
-    overflow: visible;
+    /* overflow: visible;
     background-color: white;
     width: fit-content;
     z-index: 100;
-    position: relative;
+    position: relative; */
+    overflow: visible;
+    white-space: normal;
+    height:auto;
 }
 
 p {
@@ -33,4 +36,12 @@ p {
 .button {
     float: right;
     margin-left: 4px;
+
+    background-color: var(--accent-blue2);
+    border-color: var(--accent-cyan);
 }
+
+.button:hover {
+    background-color: var(--accent-blue);
+}
+

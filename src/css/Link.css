@@ -28,3 +28,18 @@
 .link-default {
     padding-left: 6px !important;
 }
+
+/* .link-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    width: 200px;
+    max-width: 100%;
+}
+
+.link-overflow:hover{
+    overflow: visible;
+    white-space: normal;
+    height:auto;
+} */

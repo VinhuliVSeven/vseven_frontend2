@@ -16,10 +16,11 @@ interface Props {
 
 function SectionToggle(props: Props) {
     const expanded = expandJson.data.includes(props.sectionId);
+    
 
     const decoratedOnClick = useAccordionButton(props.eventKey, () => {
         if (!props.loggedIn) return;
-        
+
         if (expanded) {
             var index = expandJson.data.indexOf(props.sectionId);
             if (index != 1) {

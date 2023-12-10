@@ -30,7 +30,7 @@ function Frequent() {
                 <ol className='mb-0'>
                     {frequentJson.data.map((frequent) => {
                         var link = getLink(frequent[0], frequent[1]);
-                        return(<li><Link name={link.linkName} url={link.url}></Link></li>);
+                        return(<li key={'link' + frequent[1] + 'section' + frequent[0]}><Link name={link.linkName} url={link.url}></Link></li>);
                     })}
                     
                 </ol>

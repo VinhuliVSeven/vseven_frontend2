@@ -56,8 +56,8 @@ function LinkDraggable(props: Props) {
                                         <img src={grip} alt='' className='grip' {...provided.dragHandleProps}/>
                                     </Col>
                                     <Col md lg>
-                                        <a href={props.link.url}>
-                                            <p className='hanging mb-0'>{props.link.linkName}</p>
+                                        <a href={props.link.url} target="_blank">
+                                            <p className='hanging mb-0 link-overflow'>{props.link.linkName}</p>
                                         </a>
                                     </Col>
                                     <Col md='2' lg='1'>

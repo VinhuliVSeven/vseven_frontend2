@@ -15,8 +15,8 @@ function Launchpad(props: Props) {
         <Card>
             <Card.Header as='h6'>Launchpad Edit</Card.Header>
             <Card.Body>
-                <Button className='button' variant='success' onClick={props.save}>Save</Button>{' '}
-                <Button className='button' variant='secondary' onClick={props.cancel}>Cancel</Button>{' '}
+                <Button className='button' variant='primary' onClick={props.save}>Save</Button>{' '}
+                <Button className='button' variant='primary' onClick={props.cancel}>Cancel</Button>{' '}
             </Card.Body>
         </Card>
         

@@ -4,6 +4,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './css/App.css';
+import './css/fonts.css';
+import './css/colors.css';
 
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
@@ -217,9 +219,9 @@ function App() {
 	return (
 		<>
 			<Header></Header>
-			<Container fluid className='vh-100 d-flex flex-column'>
+			<Container fluid className='vh-100 d-flex flex-column columns'>
 				<Row className='h-100'>
-					<Col className='fixed-column bg-dark pt-3'>
+					<Col className='fixed-column vb-primary-blue pt-3'>
 						<Stack gap={3}>
 							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
 							{
@@ -236,9 +238,10 @@ function App() {
 							<Frequent></Frequent>
 						</Stack>
 					</Col>
-					<Col className='pt-3'>
+					<Col className='section-column pt-3'>
 						<DragDropContext onDragEnd={onDragEnd}>
-							<Row>
+							<div className='background'/>
+							<Row className='content'>
 								{generateColumns()}
 							</Row>
 						</DragDropContext>
