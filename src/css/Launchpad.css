@@ -1,4 +1,60 @@
-.button {
-    float: right;
-    margin-left: 4px;
+.fill-height {
+    min-height: 100%;
+    height:auto !important; /* cross-browser */
+    height: 100%; /* cross-browser */
+}
+
+Col {
+    padding-top: 5px;
+}
+
+.fixed-column {
+    width: 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+    max-height: calc(100vh - 56px);
+    overflow-y: scroll;
+}
+
+.section-column {
+    max-height: calc(100vh - 56px);
+    overflow-y: scroll;
+}
+
+.section-column .background {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    background-image: url('../assets/section-background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 100%;
+    left: 20vw;
+    right: 0;
+    top: 0px;
+    width: 80vw;
+    height: 100vh;
+
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+.section-column .content {
+    overflow: auto;
+    position: relative;
+    /* left: 20vw; */
+    /* right: 0; */
+    z-index: 9999;
+}
+
+.columns {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 56px;
+    z-index: 1;
+    display: block;
 }

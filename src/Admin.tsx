@@ -1,4 +1,5 @@
 import './css/Launchpad.css';
+import './css/Admin.css';
 
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
@@ -13,7 +14,6 @@ import LaunchpadEdit from './LaunchpadEdit';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
-import SectionDefault from './SectionDefault';
 
 import orderSectionJson from './json/order_section.json';
 import sectionOrderDefaultJson from './json/order_section_default.json';
@@ -21,6 +21,7 @@ import linkOrderJson from './json/order_link.json';
 import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
+import ModalSection from './ModalSection';
 
 function resetJson() {
 	linkOrderJson.data = [{sectionId: '', order: []}];
@@ -92,20 +93,15 @@ function generateLinkOrders() {
 	return linkOrders;
 }
 
-function Launchpad() {
+function Admin() {
 	useEffect(() => {
 		resetJson();
 		reset();
 	}, []);
 
-	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
+	const [sectionOrder, setSectionOrder] = useState(sectionOrderDefaultJson.data);
 	const [linkOrders, setLinkOrders] = useState(generateLinkOrders());
 	const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
-
-	const [loggedIn, setLoggedIn] = useState(false);
-	const toggleLoggedIn = () => {
-		setLoggedIn(!loggedIn);
-	}
 
 	const reset = () => {
 		// ???????????????? ↓↓↓↓
@@ -122,7 +118,7 @@ function Launchpad() {
 	}
 
 	const load = () => {
-		setSectionOrder(orderSectionJson.data);
+		setSectionOrder(sectionOrderDefaultJson.data);
 		setLinkOrders(generateLinkOrders());
 		setBookmarks(bookmarksJson.data);
 	}
@@ -181,21 +177,23 @@ function Launchpad() {
 		for (let column = 0; column < 4; column++) {
 			columns.push(
 				<Col key={'column' + column}>
+                    <Container className='mb-4 ps-0 pe-0'>
+                        <ModalSection column={column} sectionOrder={sectionOrder} setSectionOrder={setSectionOrder}/>
+                    </Container>
 					<Droppable droppableId={'column' + column} type='section'>
 						{(provided) => (
 							<div {...provided.droppableProps} ref={provided.innerRef}>
-								{loggedIn ? sectionOrder[column].map((sectionId, index) => (
-										<SectionContainer
-											key={'section' + sectionId}
-											sectionId={sectionId}
-											links={generateLinksFromOrder(getLinkOrder(sectionId))}
-											bookmarks={bookmarks}
-											setBookmarks={setBookmarks}
-											index={index}
-											loggedIn={loggedIn}
-										/> 
-									)) : sectionOrderDefaultJson.data[column].map((sectionId) => (
-										<SectionDefault key={'section' + sectionId} sectionId={sectionId} loggedIn={loggedIn}/>
+								{sectionOrder[column].map((sectionId, index) => (
+                                        <SectionContainer
+                                            key={'section' + sectionId}
+                                            sectionId={sectionId}
+                                            links={generateLinksFromOrder(getLinkOrder(sectionId))}
+                                            bookmarks={bookmarks}
+                                            setBookmarks={setBookmarks}
+                                            index={index}
+                                            loggedIn={true}
+                                            admin={true}
+                                        /> 
 									))
 								}
 								{provided.placeholder}
@@ -216,18 +214,14 @@ function Launchpad() {
 				<Row className='h-100'>
 					<Col className='fixed-column vb-primary-blue pt-3'>
 						<Stack gap={3}>
-							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
-							{
-								loggedIn ? <>
-									<LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
-									<DragDropContext onDragEnd={onDragEndBookmarks}>
-										<QuickLinks
-											bookmarks={bookmarks}
-											setBookmarks={setBookmarks}
-										/>
-									</DragDropContext>
-								</> : null
-							}
+							{/* <Account state={true} setState={() => {})} reset={reset}></Account> */}
+                            <LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
+                            <DragDropContext onDragEnd={onDragEndBookmarks}>
+                                <QuickLinks
+                                    bookmarks={bookmarks}
+                                    setBookmarks={setBookmarks}
+                                />
+                            </DragDropContext>
 							<Frequent></Frequent>
 						</Stack>
 					</Col>
@@ -245,4 +239,4 @@ function Launchpad() {
 	);
 }
 
-export default Launchpad;
+export default Admin;

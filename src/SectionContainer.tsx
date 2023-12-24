@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Draggable } from 'react-beautiful-dnd';
 
 import SectionLinks from './SectionLinks';
@@ -13,6 +14,7 @@ import handle from './assets/grip-vertical.svg';
 
 import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
+import { Button } from 'react-bootstrap';
 
 function getSection(sectionId: string) {
     return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
@@ -29,6 +31,7 @@ interface Props {
     setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
     loggedIn: Boolean,
     index: number,
+    admin?: Boolean,
 };
 
 
@@ -40,6 +43,15 @@ function SectionContainer(props: Props) {
             <Draggable draggableId={'section' + props.sectionId} index={props.index}>
                 {(provided) => (
                     <div ref={provided.innerRef} {...provided.draggableProps}>
+                        {
+                            props.admin == true ? <>
+                                <ButtonGroup className='fill-width'>
+                                    <Button className='small-text' variant='success'>Add Link</Button>
+                                    <Button className='small-text' variant='primary'>Edit Section</Button>
+                                    <Button className='small-text' variant='danger'>Delete Section</Button>
+                                </ButtonGroup>
+                            </> : <></>
+                        }
                         <Accordion defaultActiveKey={expanded ? '0' : '1'}>
                             <Card>
                                 <Card.Header className='section-header'>

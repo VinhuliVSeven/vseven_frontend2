@@ -33,12 +33,12 @@ function Account(props: Props) {
                                 </Col>
                             </Row>
                         </Container>
-                        <Button className='button' variant='primary' onClick={props.setState}>Sign Out</Button>{' '}
-                        <Button className='button' variant='primary' onClick={props.reset}>Reset</Button>{' '}
+                        <Button className='button float-right' variant='primary' onClick={props.setState}>Sign Out</Button>{' '}
+                        <Button className='button float-right' variant='primary' onClick={props.reset}>Reset</Button>{' '}
                     </> : null
                 }
                 {
-                    props.state ? null : <Button className='button' variant='primary' onClick={props.setState}>Sign In</Button>
+                    props.state ? null : <Button className='button float-right' variant='primary' onClick={props.setState}>Sign In</Button>
                 }
                 
             </Card.Body>

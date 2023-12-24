@@ -75,3 +75,11 @@
     top: 50%;
     transform: translate(0, -50%);
 }
+
+.small-text {
+    font-size: 12px;
+}
+
+.fill-width {
+    width: 100%;
+}

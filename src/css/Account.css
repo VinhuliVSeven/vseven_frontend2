@@ -33,10 +33,12 @@ p {
     margin-bottom: 0px;
 }
 
-.button {
+.float-right {
     float: right;
     margin-left: 4px;
+}
 
+.button {
     background-color: var(--accent-blue2);
     border-color: var(--accent-cyan);
 }
