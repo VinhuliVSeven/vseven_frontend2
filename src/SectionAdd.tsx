@@ -84,7 +84,7 @@ function SectionAdd(props: Props) {
                                 autoComplete='off'
                             />
                             <Form.Text muted>
-                                The Section ID must be unique.
+                                The Section ID entered must be unique.
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='addSection.sectionName'>
