@@ -21,7 +21,7 @@ import linkOrderJson from './json/order_link.json';
 import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
-import ModalSection from './ModalSection';
+import SectionAdd from './SectionAdd';
 
 function resetJson() {
 	linkOrderJson.data = [{sectionId: '', order: []}];
@@ -178,7 +178,7 @@ function Admin() {
 			columns.push(
 				<Col key={'column' + column}>
                     <Container className='mb-4 ps-0 pe-0'>
-                        <ModalSection column={column} sectionOrder={sectionOrder} setSectionOrder={setSectionOrder}/>
+                        <SectionAdd column={column} sectionOrder={sectionOrder} setSectionOrder={setSectionOrder}/>
                     </Container>
 					<Droppable droppableId={'column' + column} type='section'>
 						{(provided) => (
@@ -193,6 +193,8 @@ function Admin() {
                                             index={index}
                                             loggedIn={true}
                                             admin={true}
+											column={column}
+
                                         /> 
 									))
 								}
@@ -214,7 +216,7 @@ function Admin() {
 				<Row className='h-100'>
 					<Col className='fixed-column vb-primary-blue pt-3'>
 						<Stack gap={3}>
-							{/* <Account state={true} setState={() => {})} reset={reset}></Account> */}
+							{/* <Account state={true} setState={() => {})} reset={() => {})}></Account> */}
                             <LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
                             <DragDropContext onDragEnd={onDragEndBookmarks}>
                                 <QuickLinks

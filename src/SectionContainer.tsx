@@ -6,15 +6,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Draggable } from 'react-beautiful-dnd';
+import { Button } from 'react-bootstrap';
 
 import SectionLinks from './SectionLinks';
 import SectionToggle from './SectionToggle';
+import SectionDelete from './SectionDelete';
+import HoverLink from './HoverLink';
 import handle from './assets/grip-vertical.svg';
-
 
 import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
-import { Button } from 'react-bootstrap';
+
+
 
 function getSection(sectionId: string) {
     return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
@@ -32,11 +35,23 @@ interface Props {
     loggedIn: Boolean,
     index: number,
     admin?: Boolean,
+    column?: number,
+    order?: string
 };
 
 
 function SectionContainer(props: Props) {
     var expanded = expandJson.data.includes(props.sectionId);
+    const section = getSection(props.sectionId);
+    const tooltip = (
+        <>
+            <p>sectionId: "{props.sectionId}"</p>
+            <p>sectionName: "{section.sectionName}"</p>
+            <p>column: {props.column}</p>
+            <p>index: {props.index}</p>
+            <p>link count: {section.sectionLinks.length}</p>
+        </>
+    );
 
     return (
         <>
@@ -45,10 +60,16 @@ function SectionContainer(props: Props) {
                     <div ref={provided.innerRef} {...provided.draggableProps}>
                         {
                             props.admin == true ? <>
+                                <HoverLink
+                                    id={'section' + props.sectionId}
+                                    content={tooltip}
+                                >
+                                    {props.sectionId}
+                                </HoverLink>
                                 <ButtonGroup className='fill-width'>
                                     <Button className='small-text' variant='success'>Add Link</Button>
                                     <Button className='small-text' variant='primary'>Edit Section</Button>
-                                    <Button className='small-text' variant='danger'>Delete Section</Button>
+                                    <SectionDelete></SectionDelete>
                                 </ButtonGroup>
                             </> : <></>
                         }
@@ -62,7 +83,7 @@ function SectionContainer(props: Props) {
                                             </div>
                                         </Col>
                                         <Col className='ps-0 pe-0'>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{getSection(props.sectionId).sectionName}</SectionToggle>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{section.sectionName}</SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>

@@ -1,7 +1,7 @@
 import './css/Admin.css';
 
-import { useState } from 'react';
-import React, { Fragment, FormEventHandler,  } from 'react';
+import { useRef, useState } from 'react';
+import React, { FormEventHandler,  } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -14,36 +14,51 @@ interface Props {
     setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>
 }
 
-function ModalSection(props: Props) {
+function SectionAdd(props: Props) {
     const [show, setShow] = useState(false);
-    const showHandler = () => setShow(true);
+    const showHandler = () => {
+        setSectionId('');
+        setSectionName('');
+        setValidated(false);
+        setShow(true);
+    };
     const closeHandler = () => setShow(false);
 
     const [sectionId, setSectionId] = useState('');
     const [sectionName, setSectionName] = useState('');
 
-    const submitHandler: FormEventHandler = (event) => {
-        console.log('submit');
+    const [validated, setValidated] = useState(false);
 
+    const submitHandler: FormEventHandler = (event) => {
+        setValidated(true);
         event.preventDefault()
-        
-        console.log(sectionId);
-        console.log(sectionName);
+
+        var filter = linksJson.data.filter((section) => {return section.sectionId == sectionId});
+
+        // check empty
+        if (sectionId == '' || sectionName == '') {
+            event.stopPropagation();
+        }
 
         // add section
-        var filter = linksJson.data.filter((section) => {section.sectionId == sectionId});
-        if (filter.length == 0) {
+        else if (filter.length == 0) {
             linksJson.data.push({
                 sectionId: sectionId,
                 sectionName: sectionName,
                 sectionLinks: []
             });
-        }
 
-        // add to order
-        const newSectionOrder = Array.from(props.sectionOrder);
-        newSectionOrder[props.column].push(sectionId);
-        props.setSectionOrder(newSectionOrder);
+            // add to order
+            const newSectionOrder = Array.from(props.sectionOrder);
+            newSectionOrder[props.column].push(sectionId);
+            props.setSectionOrder(newSectionOrder);
+
+            closeHandler();
+        }
+        else {
+            setValidated(false);
+            event.stopPropagation();
+        }
     };
     
 
@@ -56,15 +71,21 @@ function ModalSection(props: Props) {
                     <Modal.Title>Add New Section</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={submitHandler} id={'addSection' + props.column}>
+                    <Form onSubmit={submitHandler} id={'addSection' + props.column} noValidate validated={validated}>
                         <Form.Group className='mb-3' controlId='addSection.sectionId'>
                             <Form.Label>Section ID</Form.Label>
                             <Form.Control
                                 type='text'
                                 name='sectionId'
                                 onChange={(e) => setSectionId(e.target.value)}
+                                required
                                 autoFocus
+                                isInvalid={linksJson.data.filter((section) => {return section.sectionId == sectionId}).length != 0}
+                                autoComplete='off'
                             />
+                            <Form.Text muted>
+                                The Section ID must be unique.
+                            </Form.Text>
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='addSection.sectionName'>
                             <Form.Label>Section Name</Form.Label>
@@ -72,6 +93,8 @@ function ModalSection(props: Props) {
                                 type='text'
                                 name='sectionId'
                                 onChange={(e) => setSectionName(e.target.value)}
+                                required
+                                autoComplete='off'
                             />
                         </Form.Group>
                     </Form>
@@ -80,7 +103,7 @@ function ModalSection(props: Props) {
                     <Button variant="secondary" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <Button variant="primary" type='submit' form={'addSection' + props.column} onClick={closeHandler}>
+                    <Button variant="primary" type='submit' form={'addSection' + props.column}>
                         Add
                     </Button>
                 </Modal.Footer>
@@ -89,4 +112,4 @@ function ModalSection(props: Props) {
     );
 }
 
-export default ModalSection;
+export default SectionAdd;
