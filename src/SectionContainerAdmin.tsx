@@ -6,15 +6,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Draggable } from 'react-beautiful-dnd';
 
-import SectionLinks from './SectionLinks';
+import SectionLinksAdmin from './SectionLinksAdmin';
 import SectionToggle from './SectionToggle';
 import SectionEdit from './SectionEdit';
 import handle from './assets/grip-vertical.svg';
 
 import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
-
-
+import LinkAdd from './LinkAdd';
+import { Container } from 'react-bootstrap';
 
 function getSection(sectionId: string) {
     return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
@@ -33,7 +33,15 @@ interface Props {
     index: number,
     column: number,
     sectionOrder: string[][],
-    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>
+    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>,
+    linkOrders: {
+        sectionId: string;
+        order: string[];
+    }[],
+    setLinkOrders: React.Dispatch<React.SetStateAction<{
+        sectionId: string;
+        order: string[];
+    }[]>>
 };
 
 
@@ -68,13 +76,18 @@ function SectionContainerAdmin(props: Props) {
                                     </Row>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey='0'>
-                                    <Card.Body className='section-body'>
-                                        <SectionLinks
+                                    <Card.Body className='section-body pt-2'>
+                                    <Container className='mb-2 ps-3 pe-3'>
+                                        <LinkAdd
+                                            sectionId={props.sectionId}
+                                            linkOrders={props.linkOrders}
+                                            setLinkOrders={props.setLinkOrders}
+                                        />
+                                    </Container>
+                                        <SectionLinksAdmin
                                             key={'sectionlinks' + props.sectionId}
                                             sectionId={props.sectionId}
                                             links={props.links}
-                                            bookmarks={props.bookmarks}
-                                            setBookmarks={props.setBookmarks}
                                         />
                                     </Card.Body>
                                 </Accordion.Collapse>

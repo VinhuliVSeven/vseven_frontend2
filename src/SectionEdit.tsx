@@ -133,7 +133,7 @@ function SectionEdit(props: Props) {
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'editSection' + props.column} noValidate validated={validated}>
                         <Form.Group className='mb-3' controlId='editSection.sectionId'>
-                            <Form.Label>Section ID</Form.Label>
+                            <Form.Label>Section ID <span style={{color: 'red'}}>*</span></Form.Label>
                             <Form.Control
                                 type='text'
                                 name='sectionId'
@@ -149,7 +149,7 @@ function SectionEdit(props: Props) {
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='editSection.sectionName'>
-                            <Form.Label>Section Name</Form.Label>
+                            <Form.Label>Section Name <span style={{color: 'red'}}>*</span></Form.Label>
                             <Form.Control
                                 type='text'
                                 name='sectionId'

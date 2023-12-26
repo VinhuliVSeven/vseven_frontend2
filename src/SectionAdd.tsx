@@ -68,12 +68,12 @@ function SectionAdd(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Section</Modal.Title>
+                    <Modal.Title>Add New Section to Column {props.column}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'addSection' + props.column} noValidate validated={validated}>
                         <Form.Group className='mb-3' controlId='addSection.sectionId'>
-                            <Form.Label>Section ID</Form.Label>
+                            <Form.Label>Section ID <span style={{color: 'red'}}>*</span></Form.Label>
                             <Form.Control
                                 type='text'
                                 name='sectionId'
@@ -88,7 +88,7 @@ function SectionAdd(props: Props) {
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='addSection.sectionName'>
-                            <Form.Label>Section Name</Form.Label>
+                            <Form.Label>Section Name <span style={{color: 'red'}}>*</span></Form.Label>
                             <Form.Control
                                 type='text'
                                 name='sectionId'

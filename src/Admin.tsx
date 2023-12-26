@@ -9,7 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Header from "./Header";
-import Account from './Account';
 import LaunchpadEdit from './LaunchpadEdit';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
@@ -39,12 +38,12 @@ function getSection(sectionId: string) {
 function getLink(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
     var section = linksJson.data.filter((section) => section.sectionId == sectionId)[0];
     if (section == undefined) {
-        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '#'}
     }
 
     var link = section.sectionLinks.filter((link) => link.linkId == linkId)[0];
     if (link == undefined) {
-        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
+        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '#'}
     }
 
     return link;
@@ -196,6 +195,8 @@ function Admin() {
 											column={column}
 											sectionOrder={sectionOrder}
 											setSectionOrder={setSectionOrder}
+											linkOrders={linkOrders}
+											setLinkOrders={setLinkOrders}
                                         /> 
 									))
 								}

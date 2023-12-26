@@ -99,7 +99,7 @@ function Launchpad() {
 	}, []);
 
 	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
-	const [linkOrders, setLinkOrders] = useState(generateLinkOrders());
+	const [linkOrder, setLinkOrder] = useState(generateLinkOrders());
 	const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
 
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -111,24 +111,24 @@ function Launchpad() {
 		// ???????????????? ↓↓↓↓
 		// setSectionOrder(sectionOrderDefault);
 		// ???????????????? ↑↑↑↑
-		setLinkOrders(generateLinkOrders());
+		setLinkOrder(generateLinkOrders());
 		setBookmarks([]);
 	}
 
 	const save = () => {
 		orderSectionJson.data = sectionOrder;
-		linkOrderJson.data = linkOrders;
+		linkOrderJson.data = linkOrder;
 		bookmarksJson.data = bookmarks;
 	}
 
 	const load = () => {
 		setSectionOrder(orderSectionJson.data);
-		setLinkOrders(generateLinkOrders());
+		setLinkOrder(generateLinkOrders());
 		setBookmarks(bookmarksJson.data);
 	}
 
 	const getLinkOrder = (sectionId: string) => {
-		return linkOrders.filter((section) => section.sectionId == sectionId)[0];
+		return linkOrder.filter((section) => section.sectionId == sectionId)[0];
 	}
 
 	const onDragEnd = (result: DropResult) => {
@@ -140,13 +140,13 @@ function Launchpad() {
 		if (draggableId.startsWith('link')) {
 			// link reordering
 			const sectionId = Number(source.droppableId.replace('section', ''));
-			const index = linkOrders.findIndex((linkOrder) => linkOrder.sectionId == String(sectionId));
+			const index = linkOrder.findIndex((linkOrder) => linkOrder.sectionId == String(sectionId));
 
-			const newLinkOrders = Array.from(linkOrders);
+			const newLinkOrders = Array.from(linkOrder);
 			const [removed] = newLinkOrders[index].order.splice(result.source.index, 1);
 			newLinkOrders[index].order.splice(destination.index, 0, removed);
 
-			setLinkOrders(newLinkOrders);
+			setLinkOrder(newLinkOrders);
 		}
 		else if (draggableId.startsWith('section')) {
 			// section reordering
