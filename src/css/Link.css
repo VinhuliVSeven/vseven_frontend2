@@ -4,6 +4,7 @@
 }
 
 .bookmark {
+    padding-top: 5px;
     color: black;
 }
 
@@ -12,6 +13,7 @@
 }
 
 .grip {
+    padding-bottom: 1px;
     color: black;
 }
 

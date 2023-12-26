@@ -31,10 +31,13 @@ interface Props {
     setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
     loggedIn: Boolean,
     index: number,
+    column: number,
+    sectionOrder: string[][],
+    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>
 };
 
 
-function SectionContainer(props: Props) {
+function SectionContainerAdmin(props: Props) {
     var expanded = expandJson.data.includes(props.sectionId);
     const section = getSection(props.sectionId);
 
@@ -43,6 +46,13 @@ function SectionContainer(props: Props) {
             <Draggable draggableId={'section' + props.sectionId} index={props.index}>
                 {(provided) => (
                     <div ref={provided.innerRef} {...provided.draggableProps}>
+                        <SectionEdit
+                            section={section}
+                            column={props.column}
+                            index={props.index}
+                            sectionOrder={props.sectionOrder}
+                            setSectionOrder={props.setSectionOrder}
+                        />
                         <Accordion defaultActiveKey={expanded ? '0' : '1'}>
                             <Card>
                                 <Card.Header className='section-header'>
@@ -78,4 +88,4 @@ function SectionContainer(props: Props) {
     );
 }
 
-export default SectionContainer;
+export default SectionContainerAdmin;

@@ -1,12 +1,12 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import Popover from 'react-bootstrap/Popover';
 
 interface Props {
     children?: React.ReactNode,
     id: string,
     title?: string,
-    content?: React.ReactNode
+    content?: React.ReactNode,
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 function HoverLink(props: Props) {
@@ -27,7 +27,9 @@ function HoverLink(props: Props) {
                 overlay={popover}
                 placement='bottom'
             >
-                <a href='#' className='ps-1 pe-1' style={{backgroundColor: 'white'}}>{props.children}</a>
+                <button onClick={props.onClick} style={{backgroundColor: 'white', border: 'none'}}>
+                    <a href='#' className='ps-1 pe-1' style={{backgroundColor: 'white'}}>{props.children}</a>
+                </button>
             </OverlayTrigger>
         </>
     );

@@ -13,7 +13,7 @@ import Account from './Account';
 import LaunchpadEdit from './LaunchpadEdit';
 import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
-import SectionContainer from './SectionContainer';
+import SectionContainerAdmin from './SectionContainerAdmin';
 
 import orderSectionJson from './json/order_section.json';
 import sectionOrderDefaultJson from './json/order_section_default.json';
@@ -22,6 +22,7 @@ import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
 import SectionAdd from './SectionAdd';
+
 
 function resetJson() {
 	linkOrderJson.data = [{sectionId: '', order: []}];
@@ -184,7 +185,7 @@ function Admin() {
 						{(provided) => (
 							<div {...provided.droppableProps} ref={provided.innerRef}>
 								{sectionOrder[column].map((sectionId, index) => (
-                                        <SectionContainer
+                                        <SectionContainerAdmin
                                             key={'section' + sectionId}
                                             sectionId={sectionId}
                                             links={generateLinksFromOrder(getLinkOrder(sectionId))}
@@ -192,9 +193,9 @@ function Admin() {
                                             setBookmarks={setBookmarks}
                                             index={index}
                                             loggedIn={true}
-                                            admin={true}
 											column={column}
-
+											sectionOrder={sectionOrder}
+											setSectionOrder={setSectionOrder}
                                         /> 
 									))
 								}
