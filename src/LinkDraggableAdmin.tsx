@@ -4,7 +4,6 @@ import { Draggable } from 'react-beautiful-dnd';
 import LinkEdit from './LinkEdit';
 
 import './css/Link.css';
-import pen from './assets/pen.svg';
 import grip from './assets/grip-vertical.svg';
 
 
@@ -16,6 +15,14 @@ interface Props {
         url: string;
     },
     index: number,
+    linkOrders: {
+        sectionId: string;
+        order: string[];
+    }[],
+    setLinkOrders: React.Dispatch<React.SetStateAction<{
+        sectionId: string;
+        order: string[];
+    }[]>>
 }
 
 function LinkDraggableAdmin(props: Props) {
@@ -40,6 +47,8 @@ function LinkDraggableAdmin(props: Props) {
                                             sectionId={props.sectionId}
                                             link={props.link}
                                             index={props.index}
+                                            linkOrders={props.linkOrders}
+                                            setLinkOrders={props.setLinkOrders}
                                         />
                                     </Col>
                                 </Row>   

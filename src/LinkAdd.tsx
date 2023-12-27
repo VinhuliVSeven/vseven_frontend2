@@ -93,7 +93,7 @@ function LinkAdd(props: Props) {
                                 autoComplete='off'
                             />
                             <Form.Text muted>
-                                The Link ID entered must be unique within the same section.
+                                The Link ID entered must be unique between links of the same section.
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='addLink.linkName'>

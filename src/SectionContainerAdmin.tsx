@@ -88,6 +88,8 @@ function SectionContainerAdmin(props: Props) {
                                             key={'sectionlinks' + props.sectionId}
                                             sectionId={props.sectionId}
                                             links={props.links}
+                                            linkOrders={props.linkOrders}
+                                            setLinkOrders={props.setLinkOrders}
                                         />
                                     </Card.Body>
                                 </Accordion.Collapse>

@@ -66,15 +66,18 @@ function SectionEdit(props: Props) {
         if (sectionId == '' || sectionName == '') {
             event.stopPropagation();
         }
-
-        // add section
+        else if (validateId()) {
+            setValidated(false);
+            event.stopPropagation();
+        }
+        // edit section
         else {
-            const linksIndex = linksJson.data.findIndex((section) => section.sectionId == props.section.sectionId);
+            const sectionIndex = linksJson.data.findIndex((section) => section.sectionId == props.section.sectionId);
             
-            linksJson.data[linksIndex] = {
+            linksJson.data[sectionIndex] = {
                 sectionId: sectionId,
                 sectionName: sectionName,
-                sectionLinks: linksJson.data[linksIndex].sectionLinks
+                sectionLinks: linksJson.data[sectionIndex].sectionLinks
             };
 
             const orderIndex = props.sectionOrder[props.column].findIndex((id) => id == props.section.sectionId);
@@ -111,16 +114,12 @@ function SectionEdit(props: Props) {
         return true;
     }
 
-    const onClick = () => {
-        showHandler();
-    }
-
     return (
         <>
             <HoverLink
                 id={'section' + props.section.sectionId}
                 content={tooltip}
-                onClick={onClick}
+                onClick={showHandler}
             >
                 <img src={pen} style={{marginRight: 10}}/>
                 {props.section.sectionId}
@@ -131,7 +130,7 @@ function SectionEdit(props: Props) {
                     <Modal.Title>Edit Section {props.section.sectionId}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={submitHandler} id={'editSection' + props.column} noValidate validated={validated}>
+                    <Form onSubmit={submitHandler} id={'editSection' + props.section.sectionId} noValidate validated={validated}>
                         <Form.Group className='mb-3' controlId='editSection.sectionId'>
                             <Form.Label>Section ID <span style={{color: 'red'}}>*</span></Form.Label>
                             <Form.Control
@@ -168,8 +167,8 @@ function SectionEdit(props: Props) {
                     <Button variant="danger" onClick={showDeleteHandler}>
                         Delete
                     </Button>
-                    <Button variant="primary" type='submit' form={'editSection' + props.column}>
-                        Add
+                    <Button variant="primary" type='submit' form={'editSection' + props.section.sectionId}>
+                        Edit
                     </Button>
                 </Modal.Footer>
             </Modal>

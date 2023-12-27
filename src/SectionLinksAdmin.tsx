@@ -11,6 +11,14 @@ interface Props {
         linkName: string;
         url: string;
     }[],
+    linkOrders: {
+        sectionId: string;
+        order: string[];
+    }[],
+    setLinkOrders: React.Dispatch<React.SetStateAction<{
+        sectionId: string;
+        order: string[];
+    }[]>>
 };
 
 function SectionLinksAdmin(props: Props) {
@@ -26,6 +34,8 @@ function SectionLinksAdmin(props: Props) {
                                     sectionId={props.sectionId}
                                     link={link}
                                     index={index}
+                                    linkOrders={props.linkOrders}
+                                    setLinkOrders={props.setLinkOrders}
                                 />
                             );
                         })}
