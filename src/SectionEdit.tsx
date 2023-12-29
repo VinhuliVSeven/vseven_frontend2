@@ -20,7 +20,15 @@ interface Props {
     column: number,
     index: number
     sectionOrder: string[][],
-    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>
+    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>,
+    linkOrders: {
+        sectionId: string;
+        order: string[];
+    }[],
+    setLinkOrders: React.Dispatch<React.SetStateAction<{
+        sectionId: string;
+        order: string[];
+    }[]>>
 }
 
 function SectionEdit(props: Props) {
@@ -91,13 +99,19 @@ function SectionEdit(props: Props) {
 
     const deleteSection = () => {
         const linksIndex = linksJson.data.findIndex((section) => section.sectionId == props.section.sectionId);
-        
         linksJson.data.splice(linksIndex, 1);
 
         const orderIndex = props.sectionOrder[props.column].findIndex((id) => id == props.section.sectionId);
         const newSectionOrder = Array.from(props.sectionOrder);
         newSectionOrder[props.column].splice(orderIndex, 1);
         props.setSectionOrder(newSectionOrder);
+
+        const linkOrderIndex = props.linkOrders.findIndex((linkOrder) => linkOrder.sectionId == props.section.sectionId);
+        const newLinkOrders = Array.from(props.linkOrders);
+        console.log(newLinkOrders);
+        newLinkOrders.splice(linkOrderIndex, 1);
+        props.setLinkOrders(newLinkOrders);
+        console.log(newLinkOrders);
 
         setShowDelete(false);
         closeHandler();

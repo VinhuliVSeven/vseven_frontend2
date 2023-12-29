@@ -23,6 +23,7 @@ interface Props {
 function LinkAdd(props: Props) {
     const [show, setShow] = useState(false);
     const showHandler = () => {
+        console.log(props.sectionId);
         setLinkId('');
         setLinkName('');
         setUrl('');

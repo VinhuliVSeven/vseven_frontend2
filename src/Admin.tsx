@@ -178,7 +178,13 @@ function Admin() {
 			columns.push(
 				<Col key={'column' + column}>
                     <Container className='mb-4 ps-0 pe-0'>
-                        <SectionAdd column={column} sectionOrder={sectionOrder} setSectionOrder={setSectionOrder}/>
+                        <SectionAdd
+							column={column}
+							sectionOrder={sectionOrder}
+							setSectionOrder={setSectionOrder}
+							linkOrders={linkOrders}
+							setLinkOrders={setLinkOrders}
+						/>
                     </Container>
 					<Droppable droppableId={'column' + column} type='section'>
 						{(provided) => (

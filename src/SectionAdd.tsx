@@ -11,7 +11,15 @@ import linksJson from './json/links.json';
 interface Props {
     column: number
     sectionOrder: string[][],
-    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>
+    setSectionOrder: React.Dispatch<React.SetStateAction<string[][]>>,
+    linkOrders: {
+        sectionId: string;
+        order: string[];
+    }[],
+    setLinkOrders: React.Dispatch<React.SetStateAction<{
+        sectionId: string;
+        order: string[];
+    }[]>>
 }
 
 function SectionAdd(props: Props) {
@@ -48,10 +56,18 @@ function SectionAdd(props: Props) {
                 sectionLinks: []
             });
 
-            // add to order
+            // add to section order
             const newSectionOrder = Array.from(props.sectionOrder);
             newSectionOrder[props.column].push(sectionId);
             props.setSectionOrder(newSectionOrder);
+
+            // add to link orders
+            const newLinkOrders = Array.from(props.linkOrders);
+            newLinkOrders.push({
+                sectionId: sectionId,
+                order: []
+            });
+            props.setLinkOrders(newLinkOrders);
 
             closeHandler();
         }

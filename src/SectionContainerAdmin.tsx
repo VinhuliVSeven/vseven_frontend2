@@ -60,6 +60,8 @@ function SectionContainerAdmin(props: Props) {
                             index={props.index}
                             sectionOrder={props.sectionOrder}
                             setSectionOrder={props.setSectionOrder}
+                            linkOrders={props.linkOrders}
+                            setLinkOrders={props.setLinkOrders}
                         />
                         <Accordion defaultActiveKey={expanded ? '0' : '1'}>
                             <Card>
