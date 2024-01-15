@@ -14,6 +14,7 @@ import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
 import SectionDefault from './SectionDefault';
+import { Api } from './Api';
 
 import orderSectionJson from './json/order_section.json';
 import sectionOrderDefaultJson from './json/order_section_default.json';
@@ -96,6 +97,9 @@ function Launchpad() {
 	useEffect(() => {
 		resetJson();
 		reset();
+
+		const sendApi = new Api(2);
+		sendApi.get();
 	}, []);
 
 	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
