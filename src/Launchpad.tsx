@@ -23,6 +23,9 @@ import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
 
+/**
+ * @deprecated
+ */
 function resetJson() {
 	linkOrderJson.data = [{sectionId: '', order: []}];
 	bookmarksJson.data = [['', '']];
@@ -31,11 +34,17 @@ function resetJson() {
 	expandJson.data.splice(0, 1);
 }
 
-function getSection(sectionId: string) {
+/**
+ * @deprecated
+ */
+function getSectionJson(sectionId: string) {
     return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
 }
 
-function getLink(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
+/**
+ * @deprecated
+ */
+function getLinkJson(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
     var section = linksJson.data.filter((section) => section.sectionId == sectionId)[0];
     if (section == undefined) {
         return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
@@ -49,20 +58,26 @@ function getLink(sectionId: string, linkId: string): {linkId: string, linkName: 
     return link;
 }
 
-function generateLinksFromOrder(linkOrder: {sectionId: string, order: string[]}) {
+/**
+ * @deprecated
+ */
+function generateLinksFromOrderJson(linkOrder: {sectionId: string, order: string[]}) {
 	var links: {linkId: string, linkName: string, url: string}[] = [];
 	if (linkOrder == null || linkOrder == undefined) return links;
-	var section = getSection(linkOrder.sectionId);
+	var section = getSectionJson(linkOrder.sectionId);
 	if (section == null || section == undefined) return links;
 
 	
 	linkOrder.order.forEach((linkId) => {
-		links.push(getLink(linkOrder.sectionId, linkId));
+		links.push(getLinkJson(linkOrder.sectionId, linkId));
 	});
 
 	return links;
 }
 
+/**
+ * @deprecated
+ */
 function generateLinkOrders() {
 	var remaining: string[] = [];
 	linksJson.data.forEach((section) => {
@@ -82,7 +97,7 @@ function generateLinkOrders() {
 		var linkOrder: {sectionId: string, order: string[]} = {sectionId: sectionId, order: []};
         
         // Fill with default order
-        var sectionLinks = getSection(sectionId);
+        var sectionLinks = getSectionJson(sectionId);
         sectionLinks.sectionLinks.forEach((link) => {
             linkOrder.order.push(link.linkId);
         });
@@ -98,37 +113,104 @@ function Launchpad() {
 		resetJson();
 		reset();
 
-		const sendApi = new Api(2);
-		sendApi.get();
+		const api = new Api(2);
+		api.get().then((data) => {
+			setLinks(data.getLinks());
+			setSectionOrder(data.getSectionOrder());
+			setLinkOrder(data.getLinkOrder());
+			setBookmarks(data.getBookmarks());
+		});
 	}, []);
-
-	const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
-	const [linkOrder, setLinkOrder] = useState(generateLinkOrders());
-	const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
-
+	
 	const [loggedIn, setLoggedIn] = useState(false);
 	const toggleLoggedIn = () => {
 		setLoggedIn(!loggedIn);
 	}
 
+	const [links, setLinks] = useState([{
+		sectionId: '-1',
+		sectionName: '',
+		sectionLinks: [{
+			linkId: '-1',
+			linkName: '',
+			url: ''
+		}]
+	}]);
+	const [sectionOrder, setSectionOrder] = useState([['', '']]);
+	const [linkOrder, setLinkOrder] = useState([{
+		sectionId: '-1',
+		order: ['']
+	}]);
+	const [bookmarks, setBookmarks] = useState([['', '']]);
+
+	// const [links, setLinks] = useState(linksJson.data);
+	// const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
+	// const [linkOrder, setLinkOrder] = useState(generateLinkOrders());
+	// const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
+
+
+
 	const reset = () => {
-		// ???????????????? ↓↓↓↓
-		// setSectionOrder(sectionOrderDefault);
-		// ???????????????? ↑↑↑↑
+		// // ???????????????? ↓↓↓↓
+		// // setSectionOrder(sectionOrderDefault);
+		// // ???????????????? ↑↑↑↑
 		setLinkOrder(generateLinkOrders());
 		setBookmarks([]);
 	}
-
 	const save = () => {
 		orderSectionJson.data = sectionOrder;
 		linkOrderJson.data = linkOrder;
 		bookmarksJson.data = bookmarks;
 	}
-
 	const load = () => {
 		setSectionOrder(orderSectionJson.data);
 		setLinkOrder(generateLinkOrders());
 		setBookmarks(bookmarksJson.data);
+	}
+
+	const getSection = (sectionId: string) => {
+		return links.filter((section) => section.sectionId == sectionId)[0];
+	}
+
+	const getLink = (sectionId: string, linkId: string) => {
+		var section = links.filter((section) => section.sectionId == sectionId)[0];
+		if (section == undefined) {
+			return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
+		}
+	
+		var link = section.sectionLinks.filter((link) => link.linkId == linkId)[0];
+		if (link == undefined) {
+			return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
+		}
+	
+		return link;
+	}
+	
+	const generateLinksFromOrder = (linkOrder: {sectionId: string, order: string[]}) => {
+		var links: {linkId: string, linkName: string, url: string}[] = [];
+		if (linkOrder == null || linkOrder == undefined) return links;
+		var section = getSection(linkOrder.sectionId);
+		if (section == null || section == undefined) return links;
+	
+		
+		linkOrder.order.forEach((linkId) => {
+			links.push(getLink(linkOrder.sectionId, linkId));
+		});
+	
+		return links;
+	}
+
+	const generateLinksFromBooksmarks = () => {
+		var links: {
+			linkId: string,
+			linkName: string,
+			url: string
+		}[] = [];
+		bookmarks.forEach((bookmark) => {
+			links.push(getLink(bookmark[0], bookmark[1]));
+		});
+
+		return links;
 	}
 
 	const getLinkOrder = (sectionId: string) => {
@@ -192,6 +274,7 @@ function Launchpad() {
 										<SectionContainer
 											key={'section' + sectionId}
 											sectionId={sectionId}
+											sectionName={getSection(sectionId).sectionName}
 											links={generateLinksFromOrder(getLinkOrder(sectionId))}
 											bookmarks={bookmarks}
 											setBookmarks={setBookmarks}
@@ -226,6 +309,7 @@ function Launchpad() {
 									<LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
 									<DragDropContext onDragEnd={onDragEndBookmarks}>
 										<QuickLinks
+											links={generateLinksFromBooksmarks()}
 											bookmarks={bookmarks}
 											setBookmarks={setBookmarks}
 										/>

@@ -12,7 +12,7 @@ interface GetApiType {
         linkId: string,
         linkName: string,
         linkOrder: number
-    }[]
+    }[],
     sectionOrderResponse: {
         sectionId: string,
         sectionName: string,
@@ -22,14 +22,26 @@ interface GetApiType {
 }
 
 export class Api {
-    static url = 'http://localhost:8080/';
-    static authorization = 'Basic dXNlcjI6MTIz';
+    static Url = 'http://localhost:8080/';
+    static Authorization = 'Basic dXNlcjI6MTIz';
     
     static GetApiData = class {
+        static DefaultData: GetApiType = {
+            userName: '-1',
+            quickLink: [],
+            linkOrderResponse: [],
+            sectionOrderResponse: []
+        };
+
         private data!: GetApiType;
 
-        public constructor(data: GetApiType) {
-            this.data = data;
+        public constructor(data?: GetApiType) {
+            if (data != undefined) {
+                this.data = data;
+            }
+            else {
+                this.data = Api.GetApiData.DefaultData;
+            }
         }
 
         public getLinks() {
@@ -60,7 +72,8 @@ export class Api {
                     url: '#'
                 });
             });
-
+            
+            console.log(this.data);
             return links;
         }
 
@@ -84,6 +97,48 @@ export class Api {
 
             return sectionOrder;
         }
+
+        public getLinkOrder() {
+            var linkOrder: {
+                sectionId: string,
+                order: string[]
+            }[] = [];
+
+            // add sections
+            this.data.sectionOrderResponse.forEach((section) => {
+                linkOrder.push({
+                    sectionId: section.sectionId,
+                    order: []
+                });
+            });
+
+            // add links
+            this.data.linkOrderResponse.forEach((link) => {
+                var section = linkOrder.filter((section) => section.sectionId == link.sectionId)[0];
+                if (link.linkOrder > section.order.length) {
+                    section.order = Array(link.linkOrder);
+                }
+            });
+            this.data.linkOrderResponse.forEach((link) => {
+                var section = linkOrder.filter((section) => section.sectionId == link.sectionId)[0];
+                section.order[link.linkOrder - 1] = link.linkId;
+            });
+
+            return linkOrder;
+        }
+
+        public getBookmarks() {
+            var bookmarks: string[][] = [];
+
+            this.data.quickLink.forEach((bookmark) => {
+                bookmarks.push([
+                    this.data.linkOrderResponse.filter((link) => link.linkId == bookmark.linkId)[0].sectionId,
+                    bookmark.linkId
+                ]);
+            });
+
+            return bookmarks;
+        }
     }
 
     private userId!: number;
@@ -92,20 +147,24 @@ export class Api {
         this.userId = userId;
 
         axios.interceptors.request.use((config) => {
-            config.headers.Authorization = Api.authorization;
+            config.headers.Authorization = Api.Authorization;
             return config;
         });
     }
 
 
-    public get(): GetApiType | any {
-        axios.get(Api.url + 'api/user' + this.userId + '/get')
-        .then(response => {
+    public async get() {
+        var getApiData = new Api.GetApiData();
+
+        try {
+            let response = await axios.get(Api.Url + 'api/user' + this.userId + '/get');
             console.log(response.data);
-            return new Api.GetApiData(response.data);
-        })
-        .catch(error => {
+            getApiData = new Api.GetApiData(response.data);
+        }
+        catch (error) {
             console.log(error);
-        });
+        }
+
+        return getApiData;
     }
 }

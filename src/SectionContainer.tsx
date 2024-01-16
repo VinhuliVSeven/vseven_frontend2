@@ -8,20 +8,13 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import SectionLinks from './SectionLinks';
 import SectionToggle from './SectionToggle';
-import SectionEdit from './SectionEdit';
 import handle from './assets/grip-vertical.svg';
 
-import linksJson from './json/links.json';
 import expandJson from './json/expand.json';
-
-
-
-function getSection(sectionId: string) {
-    return linksJson.data.filter((section) => section.sectionId == sectionId)[0];
-}
 
 interface Props {
     sectionId: string,
+    sectionName: string,
     links: {
         linkId: string;
         linkName: string;
@@ -36,7 +29,6 @@ interface Props {
 
 function SectionContainer(props: Props) {
     var expanded = expandJson.data.includes(props.sectionId);
-    const section = getSection(props.sectionId);
 
     return (
         <>
@@ -53,7 +45,7 @@ function SectionContainer(props: Props) {
                                             </div>
                                         </Col>
                                         <Col className='ps-0 pe-0'>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{section.sectionName}</SectionToggle>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{props.sectionName}</SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>

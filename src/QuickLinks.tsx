@@ -3,23 +3,12 @@ import { Droppable } from 'react-beautiful-dnd';
 
 import LinkDraggable from './LinkDraggable';
 
-import linksJson from './json/links.json';
-
-function getLink(sectionId: string, linkId: string): {linkId: string, linkName: string, url: string} {
-    var section = linksJson.data.filter((section) => section.sectionId == sectionId)[0];
-    if (section == undefined) {
-        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
-    }
-
-    var link = section.sectionLinks.filter((link) => link.linkId == linkId)[0];
-    if (link == undefined) {
-        return {linkId: linkId, linkName: '<<LINK DOES NOT EXIST>>', url: '/'}
-    }
-
-    return link;
-}
-
 interface Props {
+    links: {
+        linkId: string,
+        linkName: string,
+        url: string
+    }[],
     bookmarks: string[][],
     setBookmarks: React.Dispatch<React.SetStateAction<string[][]>>,
 }
@@ -34,12 +23,11 @@ function QuickLinks(props: Props) {
                     {(provided) => (
                         <div {...provided.droppableProps} ref={provided.innerRef}>
                             {props.bookmarks.map((bookmark, index) => {
-                                var link = getLink(bookmark[0], bookmark[1]);
                                 return (
                                     <LinkDraggable
-                                        key={'link' + link.linkId + 'section' + bookmark[0]}
+                                        key={'link' + props.links[index].linkId + 'section' + bookmark[0]}
                                         sectionId={bookmark[0]}
-                                        link={link}
+                                        link={props.links[index]}
                                         bookmarks={props.bookmarks}
                                         setBookmarks={props.setBookmarks}
                                         index={index}
