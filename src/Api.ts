@@ -21,6 +21,24 @@ interface GetApiType {
     }[]
 }
 
+interface SaveApiType {
+    quickLinkDTO: {
+        linksId: string[]
+    }
+    sectionOrderDTOList: {
+        userId: number,
+        sectionId: string,
+        column: number,
+        index: number
+    }[],
+    linkOrderDTOList: {
+        userId: number,
+        linkId: string,
+        sectionId: string,
+        linkOrder: number
+    }[]
+}
+
 export class Api {
     static Url = 'http://localhost:8080/';
     static Authorization = 'Basic dXNlcjI6MTIz';
@@ -166,5 +184,84 @@ export class Api {
         }
 
         return getApiData;
+    }
+
+    public async save(saveData: SaveApiType) {
+        try {
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/save', saveData);
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    public async unbookmark(bookmarksRemoved: string[][]) {
+        // conversion
+        var data = {
+            linksId: Array(bookmarksRemoved.length)
+        }
+        for (var i = 0; i < data.linksId.length; i++) {
+            data.linksId[i] = bookmarksRemoved[i][1];
+        }
+
+        try {
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/unbookmark', data);
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    public convertSaveData(
+        sectionOrder: string[][],
+        linkOrder: {
+            sectionId: string;
+            order: string[];
+        }[],
+        bookmarksAdded: string[][]
+
+    ): SaveApiType {
+        var saveData: SaveApiType = {
+            quickLinkDTO: {
+                linksId: []
+            },
+            sectionOrderDTOList: [],
+            linkOrderDTOList: []
+        }
+
+        // bookmark
+        bookmarksAdded.forEach((bookmark) => {
+            saveData.quickLinkDTO.linksId.push(bookmark[1]);
+        });
+
+        // section order
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < sectionOrder[i].length; j++) {
+                saveData.sectionOrderDTOList.push({
+                    userId: this.userId,
+                    sectionId: sectionOrder[i][j],
+                    column: i,
+                    index: j
+                });
+            }
+        }
+
+        // link order
+        linkOrder.forEach((section) => {
+            var sectionId = section.sectionId;
+            for (var i = 0; i < section.order.length; i++) {
+                saveData.linkOrderDTOList.push({
+                    userId: this.userId,
+                    linkId: section.order[i],
+                    sectionId: sectionId,
+                    linkOrder: i + 1
+                });
+            }
+        });
+
+
+        return saveData
     }
 }

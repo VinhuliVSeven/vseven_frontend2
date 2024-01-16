@@ -16,7 +16,6 @@ import SectionContainer from './SectionContainer';
 import SectionDefault from './SectionDefault';
 import { Api } from './Api';
 
-import orderSectionJson from './json/order_section.json';
 import sectionOrderDefaultJson from './json/order_section_default.json';
 import linkOrderJson from './json/order_link.json';
 import bookmarksJson from './json/bookmarks.json';
@@ -113,14 +112,16 @@ function Launchpad() {
 		resetJson();
 		reset();
 
-		const api = new Api(2);
 		api.get().then((data) => {
 			setLinks(data.getLinks());
 			setSectionOrder(data.getSectionOrder());
 			setLinkOrder(data.getLinkOrder());
 			setBookmarks(data.getBookmarks());
+			setBookmarksOld(data.getBookmarks());
 		});
 	}, []);
+
+	const api = new Api(2);
 	
 	const [loggedIn, setLoggedIn] = useState(false);
 	const toggleLoggedIn = () => {
@@ -142,6 +143,7 @@ function Launchpad() {
 		order: ['']
 	}]);
 	const [bookmarks, setBookmarks] = useState([['', '']]);
+	const [bookmarksOld, setBookmarksOld] = useState(bookmarks);
 
 	// const [links, setLinks] = useState(linksJson.data);
 	// const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
@@ -158,14 +160,36 @@ function Launchpad() {
 		setBookmarks([]);
 	}
 	const save = () => {
-		orderSectionJson.data = sectionOrder;
-		linkOrderJson.data = linkOrder;
-		bookmarksJson.data = bookmarks;
+		// bookmarks added difference
+		var bookmarksAdded: string[][] = [];
+		bookmarks.forEach((bookmark) => {
+			if (bookmarksOld.filter((bookmarkOld) => bookmark[0] == bookmarkOld[0] && bookmark[1] == bookmarkOld[1]).length == 0) {
+				bookmarksAdded.push(bookmark);
+			}
+		});
+
+		// bookmarks removed difference
+		var bookmarksRemoved: string[][] = [];
+		bookmarksOld.forEach((bookmarkOld) => {
+			if (bookmarks.filter((bookmark) => bookmark[0] == bookmarkOld[0] && bookmark[1] == bookmarkOld[1]).length == 0) {
+				bookmarksRemoved.push(bookmarkOld);
+			}
+		});
+
+		api.save(api.convertSaveData(sectionOrder, linkOrder, bookmarksAdded));
+		api.unbookmark(bookmarksRemoved).then(() => {
+			setBookmarksOld(bookmarks);
+		});
 	}
+
 	const load = () => {
-		setSectionOrder(orderSectionJson.data);
-		setLinkOrder(generateLinkOrders());
-		setBookmarks(bookmarksJson.data);
+		api.get().then((data) => {
+			setLinks(data.getLinks());
+			setSectionOrder(data.getSectionOrder());
+			setLinkOrder(data.getLinkOrder());
+			setBookmarks(data.getBookmarks());
+			setBookmarksOld(data.getBookmarks());
+		});
 	}
 
 	const getSection = (sectionId: string) => {

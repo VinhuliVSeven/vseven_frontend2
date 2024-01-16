@@ -226,12 +226,6 @@ function Admin() {
 						<Stack gap={3}>
 							{/* <Account state={true} setState={() => {})} reset={() => {})}></Account> */}
                             <LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
-                            <DragDropContext onDragEnd={onDragEndBookmarks}>
-                                <QuickLinks
-                                    bookmarks={bookmarks}
-                                    setBookmarks={setBookmarks}
-                                />
-                            </DragDropContext>
 							<Frequent></Frequent>
 						</Stack>
 					</Col>
