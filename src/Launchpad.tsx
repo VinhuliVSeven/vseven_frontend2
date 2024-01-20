@@ -119,6 +119,11 @@ function Launchpad() {
 			setBookmarks(data.getBookmarks());
 			setBookmarksOld(data.getBookmarks());
 		});
+
+		api.frequent().then((data) => {
+			setFrequent(data.topLinks);
+		})
+
 	}, []);
 
 	const api = new Api(2);
@@ -144,6 +149,11 @@ function Launchpad() {
 	}]);
 	const [bookmarks, setBookmarks] = useState([['', '']]);
 	const [bookmarksOld, setBookmarksOld] = useState(bookmarks);
+	const [frequent, setFrequent] = useState([{
+		linkId: '',
+		linkName: '',
+		url: ''
+	}]);
 
 	// const [links, setLinks] = useState(linksJson.data);
 	// const [sectionOrder, setSectionOrder] = useState(orderSectionJson.data);
@@ -153,12 +163,16 @@ function Launchpad() {
 
 
 	const reset = () => {
-		// // ???????????????? ↓↓↓↓
-		// // setSectionOrder(sectionOrderDefault);
-		// // ???????????????? ↑↑↑↑
-		setLinkOrder(generateLinkOrders());
+		api.getDefault().then((data) => {
+			setLinks(data.getLinks());
+			setSectionOrder(data.getSectionOrder());
+			setLinkOrder(data.getLinkOrder());
+		});
 		setBookmarks([]);
+
+		save();
 	}
+
 	const save = () => {
 		// bookmarks added difference
 		var bookmarksAdded: string[][] = [];
@@ -340,7 +354,7 @@ function Launchpad() {
 									</DragDropContext>
 								</> : null
 							}
-							<Frequent></Frequent>
+							<Frequent links={frequent}/>
 						</Stack>
 					</Col>
 					<Col className='section-column pt-3'>

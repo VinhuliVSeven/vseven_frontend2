@@ -99,6 +99,10 @@ export class Api {
             var sectionOrder: string[][] = [[], [], [], []];
             var max = [0, 0, 0, 0];
 
+            if (this.data.sectionOrderResponse.length == 0) {
+                return sectionOrder;
+            }
+
             this.data.sectionOrderResponse.forEach((section) => {
                 if (section.index > max[section.column]) {
                     max[section.column] = section.index;
@@ -172,18 +176,33 @@ export class Api {
 
 
     public async get() {
-        var getApiData = new Api.GetApiData();
+        var data = new Api.GetApiData();
 
         try {
             let response = await axios.get(Api.Url + 'api/user' + this.userId + '/get');
             console.log(response.data);
-            getApiData = new Api.GetApiData(response.data);
+            data = new Api.GetApiData(response.data);
         }
         catch (error) {
             console.log(error);
         }
 
-        return getApiData;
+        return data;
+    }
+
+    public async getDefault() {
+        var data = new Api.GetApiData();
+
+        try {
+            let response = await axios.get(Api.Url + 'api/user6/get');
+            console.log(response.data);
+            data = new Api.GetApiData(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+        return data;
     }
 
     public async save(saveData: SaveApiType) {
@@ -212,6 +231,28 @@ export class Api {
         catch (error) {
             console.log(error);
         }
+    }
+
+    public async frequent() {
+        var data: {
+            topLinks: {
+                linkId: string,
+                linkName: string,
+                url: string
+            } []
+        } = {
+            topLinks: []
+        };
+
+        try {
+            let response = await axios.get(Api.Url + 'api/top-links');
+            data = response.data;
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+        return data;
     }
 
     public convertSaveData(
