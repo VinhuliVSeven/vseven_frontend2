@@ -226,7 +226,6 @@ function Admin() {
 						<Stack gap={3}>
 							{/* <Account state={true} setState={() => {})} reset={() => {})}></Account> */}
                             <LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
-							<Frequent></Frequent>
 						</Stack>
 					</Col>
 					<Col className='section-column pt-3'>
