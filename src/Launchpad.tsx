@@ -110,7 +110,6 @@ function generateLinkOrders() {
 function Launchpad() {
 	useEffect(() => {
 		resetJson();
-		reset();
 
 		api.get().then((data) => {
 			setLinks(data.getLinks());
@@ -163,14 +162,15 @@ function Launchpad() {
 
 
 	const reset = () => {
-		api.getDefault().then((data) => {
-			setLinks(data.getLinks());
-			setSectionOrder(data.getSectionOrder());
-			setLinkOrder(data.getLinkOrder());
+		api.unbookmark(bookmarks).then(() => {
+			setBookmarksOld(bookmarks);
 		});
-		setBookmarks([]);
 
-		save();
+		api.getDefault().then((data) => {
+			api.save(api.convertSaveData(data.getSectionOrder(), data.getLinkOrder(), []));
+		});
+
+		load();
 	}
 
 	const save = () => {

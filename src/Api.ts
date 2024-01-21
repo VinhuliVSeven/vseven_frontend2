@@ -91,7 +91,6 @@ export class Api {
                 });
             });
             
-            console.log(this.data);
             return links;
         }
 
