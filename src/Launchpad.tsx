@@ -165,16 +165,18 @@ function Launchpad() {
 		api.reset();
 
 		api.getDefault().then((data) => {
-			api.save(api.convertSaveData(data.getSectionOrder(), data.getLinkOrder(), []));
+			api.save(api.convertSaveData(data.getSectionOrder(), data.getLinkOrder(), [])).then(() => {
+				api.get().then((data) => {
+					setLinks(data.getLinks());
+					setSectionOrder(data.getSectionOrder());
+					setLinkOrder(data.getLinkOrder());
+					setBookmarks(data.getBookmarks());
+					setBookmarksOld(data.getBookmarks());
+				});
+			});
 		});
 
-		api.get().then((data) => {
-			setLinks(data.getLinks());
-			setSectionOrder(data.getSectionOrder());
-			setLinkOrder(data.getLinkOrder());
-			setBookmarks(data.getBookmarks());
-			setBookmarksOld(data.getBookmarks());
-		});
+		
 	}
 
 	const save = () => {
@@ -345,7 +347,7 @@ function Launchpad() {
 				<Row className='h-100'>
 					<Col className='fixed-column vb-primary-blue pt-3'>
 						<Stack gap={3}>
-							<Account state={loggedIn} setState={toggleLoggedIn} reset={() => {reset(); setTimeout(() => reset(), 100)}}></Account>
+							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
 							{
 								loggedIn ? <>
 									<LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>
