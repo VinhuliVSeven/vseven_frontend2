@@ -162,9 +162,7 @@ function Launchpad() {
 
 
 	const reset = () => {
-		api.unbookmark(bookmarks).then(() => {
-			setBookmarksOld(bookmarks);
-		});
+		api.reset();
 
 		api.getDefault().then((data) => {
 			api.save(api.convertSaveData(data.getSectionOrder(), data.getLinkOrder(), []));

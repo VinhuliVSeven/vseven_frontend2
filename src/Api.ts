@@ -232,6 +232,17 @@ export class Api {
         }
     }
 
+    public async reset() {
+        try {
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/reset');
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+
     public async frequent() {
         var data: {
             topLinks: {
