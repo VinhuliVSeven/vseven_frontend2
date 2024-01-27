@@ -2,11 +2,11 @@ import { FormEventHandler, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 
 
-async function auth() {
-    try {
-        
-    }
-}
+// async function auth() {
+//     try {
+
+//     }
+// }
 
 function Login() {
     const [show, setShow] = useState(false);
