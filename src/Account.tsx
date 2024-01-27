@@ -5,12 +5,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import profile from './assets/profile.png';
 import Login from './Login';
+import { Api } from './Api';
 
 import './css/Account.css'
+
 
 interface Props {
 	state: boolean,
 	setState: any,
+    setApi: React.Dispatch<React.SetStateAction<Api>>,
     reset: () => any
 }   
 
@@ -39,8 +42,8 @@ function Account(props: Props) {
                     </> : null
                 }
                 {
-                    props.state ? null : <><Button className='button' variant='primary' onClick={props.setState}>Sign In</Button><Login/></>
-                    // props.state ? null : 
+                    props.state ? null : <Login setState={props.setState} setApi={props.setApi}/>
+                    // props.state ? null : <Button className='button' variant='primary' onClick={props.setState}>Sign In</Button>
                 }
                 
             </Card.Body>

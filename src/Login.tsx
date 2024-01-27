@@ -1,14 +1,13 @@
 import { FormEventHandler, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
+import { Api } from "./Api";
 
+interface Props {
+    setState: any,
+    setApi: React.Dispatch<React.SetStateAction<Api>>,
+}
 
-// async function auth() {
-//     try {
-
-//     }
-// }
-
-function Login() {
+function Login(props: Props) {
     const [show, setShow] = useState(false);
     const showHandler = () => {
         setValidated(false);
@@ -16,21 +15,43 @@ function Login() {
     }
     const closeHandler = () => setShow(false);
 
+    const [showError, setShowError] = useState(false);
+        const showErrorHandler = () => {
+        setShowError(true);
+        closeHandler();
+    };
+    const closeErrorHandler = () => {
+        setShowError(false)
+        setShow(true);
+    };
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [validated, setValidated] = useState(false);
 
     const submitHandler: FormEventHandler = (event) => {
-        setValidated(true);
+        // setValidated(true);
         event.preventDefault()
 
+        var parsedUsername = username;
+        if (username.startsWith('user')) {
+            parsedUsername = username.substring(4)
+        }
 
+        const api = new Api(parseInt(parsedUsername), password)
+        api.get().then((data) => {
+            props.setApi(api);
+            props.setState();
+            closeHandler();
+        }).catch((error) => {
+            showErrorHandler();
+        });
     };
     
     return (
         <>
-            <Button variant='dark' onClick={showHandler}>Log In be</Button>
+            <Button variant='primary' className='button float-right' onClick={showHandler}>Sign In</Button>
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
@@ -67,6 +88,18 @@ function Login() {
                     </Button>
                     <Button variant="primary" type='submit' form={'login'}>
                         Login
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showError} onHide={closeErrorHandler}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Wrong username or password.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='secondary' onClick={closeErrorHandler}>
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>

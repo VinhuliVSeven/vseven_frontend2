@@ -108,8 +108,10 @@ function generateLinkOrders() {
 }
 
 function Launchpad() {
+	const [api, setApi] = useState(new Api(2, '123'));
+
 	useEffect(() => {
-		resetJson();
+		// resetJson();
 
 		api.get().then((data) => {
 			setLinks(data.getLinks());
@@ -123,9 +125,7 @@ function Launchpad() {
 			setFrequent(data.topLinks);
 		})
 
-	}, []);
-
-	const api = new Api(2);
+	}, [api]);
 	
 	const [loggedIn, setLoggedIn] = useState(false);
 	const toggleLoggedIn = () => {
@@ -351,7 +351,7 @@ function Launchpad() {
 				<Row className='h-100'>
 					<Col className='fixed-column vb-primary-blue pt-3'>
 						<Stack gap={3}>
-							<Account state={loggedIn} setState={toggleLoggedIn} reset={reset}></Account>
+							<Account state={loggedIn} setState={toggleLoggedIn} setApi={setApi} reset={reset}></Account>
 							{
 								loggedIn ? <>
 									<LaunchpadEdit save={save} cancel={load}></LaunchpadEdit>

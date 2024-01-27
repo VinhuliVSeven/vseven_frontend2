@@ -164,14 +164,17 @@ export class Api {
     }
 
     private userId!: number;
+    private password!: string;
 
-    public constructor(userId: number) {
-        this.userId = userId;
+    public constructor(username: number, password: string) {
+        this.userId = username;
+        this.password = password;
 
-        axios.interceptors.request.use((config) => {
-            config.headers.Authorization = Api.Authorization;
-            return config;
-        });
+        // axios.interceptors.request.use((config) => {
+        //     // config.headers.Authorization = Api.Authorization;
+        //     config.auth?.username = this.userId;
+        //     return config;
+        // });
     }
 
 
@@ -179,12 +182,18 @@ export class Api {
         var data = new Api.GetApiData();
 
         try {
-            let response = await axios.get(Api.Url + 'api/user' + this.userId + '/get');
+            let response = await axios.get(Api.Url + 'api/user' + this.userId + '/get', {
+                auth: {
+                    username: 'user' + this.userId,
+                    password: this.password
+                }
+            });
             console.log(response.data);
             data = new Api.GetApiData(response.data);
         }
         catch (error) {
             console.log(error);
+            throw error;
         }
 
         return data;
@@ -194,7 +203,11 @@ export class Api {
         var data = new Api.GetApiData();
 
         try {
-            let response = await axios.get(Api.Url + 'api/user6/get');
+            let response = await axios.get(Api.Url + 'api/user6/get', {
+                headers: {
+                    Authorization: Api.Authorization
+                }
+            });
             console.log(response.data);
             data = new Api.GetApiData(response.data);
         }
@@ -207,7 +220,12 @@ export class Api {
 
     public async save(saveData: SaveApiType) {
         try {
-            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/save', saveData);
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/save', saveData, {
+                auth: {
+                    username: 'user' + this.userId,
+                    password: this.password
+                }
+            });
             console.log(response.data);
         }
         catch (error) {
@@ -225,7 +243,12 @@ export class Api {
         }
 
         try {
-            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/unbookmark', data);
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/unbookmark', data, {
+                auth: {
+                    username: 'user' + this.userId,
+                    password: this.password
+                }
+            });
             console.log(response.data);
         }
         catch (error) {
@@ -235,7 +258,12 @@ export class Api {
 
     public async reset() {
         try {
-            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/reset');
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/reset', {
+                auth: {
+                    username: 'user' + this.userId,
+                    password: this.password
+                }
+            });
             console.log(response.data);
         }
         catch (error) {
@@ -256,7 +284,11 @@ export class Api {
         };
 
         try {
-            let response = await axios.get(Api.Url + 'api/top-links');
+            let response = await axios.get(Api.Url + 'api/top-links', {
+                headers: {
+                    Authorization: Api.Authorization
+                }
+            });
             data = response.data;
         }
         catch (error) {
