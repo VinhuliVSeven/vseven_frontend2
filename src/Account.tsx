@@ -4,6 +4,7 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import profile from './assets/profile.png';
+import Login from './Login';
 
 import './css/Account.css'
 
@@ -38,7 +39,8 @@ function Account(props: Props) {
                     </> : null
                 }
                 {
-                    props.state ? null : <Button className='button float-right' variant='primary' onClick={props.setState}>Sign In</Button>
+                    props.state ? null : <><Button className='button' variant='primary' onClick={props.setState}>Sign In</Button><Login/></>
+                    // props.state ? null : 
                 }
                 
             </Card.Body>
