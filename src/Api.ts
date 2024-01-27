@@ -11,6 +11,7 @@ interface GetApiType {
         sectionId: string,
         linkId: string,
         linkName: string,
+        url: string,
         linkOrder: number
     }[],
     sectionOrderResponse: {
@@ -87,7 +88,7 @@ export class Api {
                 links.filter((section) => section.sectionId == link.sectionId)[0].sectionLinks.push({
                     linkId: link.linkId,
                     linkName: link.linkName,
-                    url: '#'
+                    url: link.url
                 });
             });
             
