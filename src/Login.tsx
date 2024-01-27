@@ -27,7 +27,6 @@ function Login(props: Props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [responseData, setResponseData] = useState('');
 
     const [validated, setValidated] = useState(false);
 
@@ -49,7 +48,7 @@ function Login(props: Props) {
             showErrorHandler();
         });
     };
-    
+
     return (
         <>
             <Button variant='primary' className='button float-right' onClick={showHandler}>Sign In</Button>
