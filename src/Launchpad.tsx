@@ -283,6 +283,10 @@ function Launchpad() {
 			const sourceId = Number(source.droppableId.replace('column', ''));
 			const destinationId = Number(destination.droppableId.replace('column', ''));
 
+			if (sectionOrder[sourceId].length <= 1) {
+				return;
+			}
+
 			const newSectionOrder = Array.from(sectionOrder);
 			const [removed] = newSectionOrder[sourceId].splice(result.source.index, 1);
 			newSectionOrder[destinationId].splice(destination.index, 0, removed);
