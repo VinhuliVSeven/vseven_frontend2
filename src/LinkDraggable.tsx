@@ -6,6 +6,7 @@ import './css/Link.css';
 import bookmark from './assets/bookmark.svg';
 import bookmark_fill from './assets/bookmark-fill.svg';
 import grip from './assets/grip-vertical.svg';
+import { Api } from './Api';
 
 interface Props {
     sectionId: string,
@@ -56,7 +57,7 @@ function LinkDraggable(props: Props) {
                                         <img src={grip} alt='' className='grip' {...provided.dragHandleProps}/>
                                     </Col>
                                     <Col md lg>
-                                        <a href={props.link.url} target="_blank">
+                                        <a href={props.link.url} onClick={() => {Api.frequentUpdate(props.link.linkId)}} target="_blank">
                                             <p className='hanging mb-0 link-overflow'>{props.link.linkName}</p>
                                         </a>
                                     </Col>

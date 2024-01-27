@@ -298,6 +298,20 @@ export class Api {
         return data;
     }
 
+    static async frequentUpdate(linkId: string) {
+        try {
+            let response = await axios.post(Api.Url + 'api/top-links/update/' + linkId, {}, {
+                headers: {
+                    Authorization: Api.Authorization
+                }
+            });
+            console.log(response.data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
     public convertSaveData(
         sectionOrder: string[][],
         linkOrder: {
