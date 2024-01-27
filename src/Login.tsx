@@ -1,13 +1,6 @@
 import { FormEventHandler, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
-
-
-// async function auth() {
-//     try {
-
-//     }
-// }
-
+import axios from 'axios';
 function Login() {
     const [show, setShow] = useState(false);
     const showHandler = () => {
@@ -18,6 +11,7 @@ function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [responseData, setResponseData] = useState('');
 
     const [validated, setValidated] = useState(false);
 
@@ -27,7 +21,6 @@ function Login() {
 
 
     };
-    
     return (
         <>
             <Button variant='dark' onClick={showHandler}>Log In be</Button>
@@ -37,12 +30,13 @@ function Login() {
                     <Modal.Title>Log In</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={submitHandler} id={'login'} noValidate validated={validated}>
+                    <Form onSubmit={handleSubmit} id={'login'} noValidate validated={validated}>
                         <Form.Group className='mb-3' controlId='login.username'>
                             <Form.Label>Username</Form.Label>
                             <Form.Control
                                 type='text'
                                 name='username'
+                                value= {username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                                 autoFocus
@@ -53,6 +47,7 @@ function Login() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type='password'
+                                value = {password}
                                 name='password'
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -70,8 +65,32 @@ function Login() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            
         </>
     )
-}
+    async function handleSubmit(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        try {
+          const session_url = "http://localhost:8080/api/${username}/get";
+    
+          const response = await axios.get(session_url, {
+            auth: {
+              username: username,
+              password: password,
+            },
+          });
+    
+          // Handle successful login response here if needed
+          setResponseData(response.data);
+          console.log(response.data);
+        } catch (error) {
+          // Handle login error here
+          console.error("Login failed:", error);
+        }
+      }
+    }
+
 
 export default Login
