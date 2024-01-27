@@ -258,7 +258,7 @@ export class Api {
 
     public async reset() {
         try {
-            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/reset', {
+            let response = await axios.post(Api.Url + 'api/user' + this.userId + '/reset', {}, {
                 auth: {
                     username: 'user' + this.userId,
                     password: this.password
