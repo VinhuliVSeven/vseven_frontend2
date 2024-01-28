@@ -74,7 +74,7 @@ function LinkAdd(props: Props) {
 
     return (
         <>
-            <Button className='fill-width' variant='primary' onClick={showHandler}>＋ Add Link</Button>
+            <Button className='fill-width button' variant='primary' onClick={showHandler}>＋ Add Link</Button>
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
@@ -120,10 +120,10 @@ function LinkAdd(props: Props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={closeHandler}>
+                    <Button className='button-gray' variant="secondary" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <Button variant="primary" type='submit' form={'addLink' + props.sectionId}>
+                    <Button className='button' variant="primary" type='submit' form={'addLink' + props.sectionId}>
                         Add
                     </Button>
                 </Modal.Footer>
