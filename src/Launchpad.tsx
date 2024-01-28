@@ -291,7 +291,7 @@ function Launchpad() {
 
 			if (sectionOrder[sourceId].length <= 1) {
 				setPopupTitle('Error');
-				setPopupMessage('A column needs to have atleast 1 section within.')
+				setPopupMessage('A column needs to have at least 1 section within.')
 				showPopupHandler();
 				return;
 			}
