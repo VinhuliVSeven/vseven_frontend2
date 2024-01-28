@@ -39,8 +39,8 @@ Col {
     width: 80vw;
     height: 100vh;
 
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
+    /* filter: blur(4px);
+    -webkit-filter: blur(4px); */
 }
 
 .section-column .content {
