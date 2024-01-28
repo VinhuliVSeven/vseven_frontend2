@@ -1,11 +1,9 @@
 import './css/Header.css';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
-import logo from './assets/logo.png';
+import logo from './assets/logo-full.svg';
 
 function Header() {
     return (
@@ -16,17 +14,14 @@ function Header() {
                         <img 
                             src={logo}
                             alt='VinUni Launchpad'
-                            width='30'
+                            // width='30'
                             height='30'
-                            className='d-inline-block align-top'
+                            className='d-inline-block align-top header-logo'
                         />{' '}
-                        VinUni LaunchPad
+                        <span className='header-text'>
+                            VinUni LaunchPad
+                        </span>
                     </Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-end">
-                        {/* <Link to='/admin'>
-                            <Button className='button' variant='primary'>Link Editor</Button>
-                        </Link> */}
-                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         </>

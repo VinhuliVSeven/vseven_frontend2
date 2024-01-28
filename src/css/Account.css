@@ -38,12 +38,3 @@ p {
     margin-left: 4px;
 }
 
-.button {
-    background-color: var(--accent-blue2);
-    border-color: var(--accent-cyan);
-}
-
-.button:hover {
-    background-color: var(--accent-blue);
-}
-

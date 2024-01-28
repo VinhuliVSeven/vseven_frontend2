@@ -175,13 +175,13 @@ function SectionEdit(props: Props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={closeHandler}>
+                    <Button className="button-gray" variant="secondary" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={showDeleteHandler}>
+                    <Button className="button-red" variant="danger" onClick={showDeleteHandler}>
                         Delete
                     </Button>
-                    <Button variant="primary" type='submit' form={'editSection' + props.section.sectionId}>
+                    <Button className="button" variant="primary" type='submit' form={'editSection' + props.section.sectionId}>
                         Edit
                     </Button>
                 </Modal.Footer>
@@ -193,10 +193,10 @@ function SectionEdit(props: Props) {
                 </Modal.Header>
                 <Modal.Body>Are you sure you want to delete section {props.section.sectionId}?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant='secondary' onClick={closeDeleteHandler}>
+                    <Button className="button-gray" variant='secondary' onClick={closeDeleteHandler}>
                         Cancel
                     </Button>
-                    <Button variant='danger' onClick={deleteSection}>
+                    <Button className="button-red" variant='danger' onClick={deleteSection}>
                         Delete
                     </Button>
                 </Modal.Footer>

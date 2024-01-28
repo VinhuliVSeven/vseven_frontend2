@@ -59,3 +59,32 @@ Col {
     z-index: 1;
     display: block;
 }
+
+a {
+    color: var(--primary-blue2) !important;
+}
+
+.fixed-title {
+    font-weight: 700;
+    color: var(--primary-red) !important;
+}
+
+.button {
+    background-color: var(--accent-blue2);
+    border-color: var(--accent-blue);
+}
+
+.button:hover {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue2);
+}
+
+.button-red {
+    background-color: var(--primary-red);
+}
+
+.button-gray {
+    background-color: var(--accent-gray);
+    border-color: var(--accent-bluegray);
+    color: black;
+}

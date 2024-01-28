@@ -116,10 +116,10 @@ function SectionAdd(props: Props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={closeHandler}>
+                    <Button className="button-gray" variant="secondary" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <Button variant="primary" type='submit' form={'addSection' + props.column}>
+                    <Button className="button" variant="primary" type='submit' form={'addSection' + props.column}>
                         Add
                     </Button>
                 </Modal.Footer>

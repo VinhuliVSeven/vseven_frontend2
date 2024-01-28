@@ -17,7 +17,7 @@ function QuickLinks(props: Props) {
     return (
     <>
         <Card>
-            <Card.Header as='h6'>Quick Links</Card.Header>
+            <Card.Header as='h6'><span className="fixed-title">Quick Links</span></Card.Header>
             <Card.Body className='ps-0'>
                 <Droppable droppableId='bookmarks'>
                     {(provided) => (

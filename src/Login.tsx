@@ -10,10 +10,16 @@ interface Props {
 function Login(props: Props) {
     const [show, setShow] = useState(false);
     const showHandler = () => {
+        setUsername('');
+        setPassword('');
         setValidated(false);
         setShow(true);
     }
-    const closeHandler = () => setShow(false);
+    const closeHandler = () => {
+        setShow(false);
+        setUsername('');
+        setPassword('');
+    }
 
     const [showError, setShowError] = useState(false);
         const showErrorHandler = () => {
@@ -55,7 +61,7 @@ function Login(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Log In</Modal.Title>
+                    <Modal.Title>Sign In</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'login'} noValidate validated={validated}>
@@ -85,10 +91,10 @@ function Login(props: Props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={closeHandler}>
+                    <Button className="button-gray" variant="secondary" onClick={closeHandler}>
                         Cancel
                     </Button>
-                    <Button variant="primary" type='submit' form={'login'}>
+                    <Button className="button" variant="primary" type='submit' form={'login'}>
                         Login
                     </Button>
                 </Modal.Footer>
@@ -100,7 +106,7 @@ function Login(props: Props) {
                 </Modal.Header>
                 <Modal.Body>Wrong username or password.</Modal.Body>
                 <Modal.Footer>
-                    <Button variant='secondary' onClick={closeErrorHandler}>
+                    <Button className="button-gray" variant='secondary' onClick={closeErrorHandler}>
                         Close
                     </Button>
                 </Modal.Footer>

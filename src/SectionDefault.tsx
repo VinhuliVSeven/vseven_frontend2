@@ -38,7 +38,7 @@ function SectionDefault(props: Props) {
                     <Card.Header className='section-header'>
                         <Row className=''>
                             <Col className='ps-0 pe-0'>
-                                <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{getSection(props.sectionId).sectionName}</SectionToggle>
+                                <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}><span className="section-title">{getSection(props.sectionId).sectionName}</span></SectionToggle>
                             </Col>
                         </Row>
                     </Card.Header>

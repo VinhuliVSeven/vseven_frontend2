@@ -13,11 +13,10 @@ interface Props {
 }
 
 function Frequent(props: Props) {
-
     return (
     <>
         <Card>
-            <Card.Header as='h6'>Most-visited Links</Card.Header>
+            <Card.Header as='h6'><span className="fixed-title">Most-visited Links</span></Card.Header>
             <Card.Body>
                 <ol className='mb-0'>
                     {props.links.map((link) => {

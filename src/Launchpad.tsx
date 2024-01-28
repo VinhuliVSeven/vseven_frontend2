@@ -14,6 +14,7 @@ import QuickLinks from './QuickLinks';
 import Frequent from './Frequent';
 import SectionContainer from './SectionContainer';
 import SectionDefault from './SectionDefault';
+import About from './About';
 import { Api } from './Api';
 
 import sectionOrderDefaultJson from './json/order_section_default.json';
@@ -365,6 +366,7 @@ function Launchpad() {
 								</> : null
 							}
 							<Frequent links={frequent}/>
+							<About/>
 						</Stack>
 					</Col>
 					<Col className='section-column pt-3'>

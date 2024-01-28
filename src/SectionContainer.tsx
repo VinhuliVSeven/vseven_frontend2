@@ -45,7 +45,7 @@ function SectionContainer(props: Props) {
                                             </div>
                                         </Col>
                                         <Col className='ps-0 pe-0'>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{props.sectionName}</SectionToggle>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}><span className='section-title'>{props.sectionName}</span></SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>

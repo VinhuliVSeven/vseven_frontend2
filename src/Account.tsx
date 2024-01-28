@@ -22,7 +22,7 @@ function Account(props: Props) {
     return (
     <>
         <Card>
-            <Card.Header as='h6'>Account</Card.Header>
+            <Card.Header as='h6'><span className="fixed-title">Account</span></Card.Header>
             <Card.Body>
                 {
                     props.state ? <>
@@ -38,7 +38,7 @@ function Account(props: Props) {
                             </Row>
                         </Container>
                         <Button className='button float-right' variant='primary' onClick={props.setState}>Sign Out</Button>{' '}
-                        <Button className='button float-right' variant='primary' onClick={props.reset}>Reset</Button>{' '}
+                        <Button className='button-red float-right' variant='danger' onClick={props.reset}>Reset</Button>{' '}
                     </> : null
                 }
                 {
@@ -48,8 +48,6 @@ function Account(props: Props) {
                 
             </Card.Body>
         </Card>
-        
-
     </>
     );
 }

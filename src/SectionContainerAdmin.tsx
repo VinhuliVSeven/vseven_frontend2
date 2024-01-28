@@ -73,7 +73,7 @@ function SectionContainerAdmin(props: Props) {
                                             </div>
                                         </Col>
                                         <Col className='ps-0 pe-0'>
-                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}>{section.sectionName}</SectionToggle>
+                                            <SectionToggle sectionId={props.sectionId} eventKey='0' loggedIn={props.loggedIn}><span className="section-title">{section.sectionName}</span></SectionToggle>
                                         </Col>
                                     </Row>
                                 </Card.Header>

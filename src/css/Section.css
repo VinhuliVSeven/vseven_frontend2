@@ -45,6 +45,11 @@
     padding-bottom: 0px;
 }
 
+.section-title {
+    font-weight: 700;
+    color: var(--primary-red) !important;
+}
+
 .section-body {
     padding-top: 15px;
     padding-left: 0px;
