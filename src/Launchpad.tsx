@@ -22,6 +22,7 @@ import linkOrderJson from './json/order_link.json';
 import bookmarksJson from './json/bookmarks.json';
 import expandJson from './json/expand.json';
 import linksJson from './json/links.json';
+import { Button, Modal } from 'react-bootstrap';
 
 /**
  * @deprecated
@@ -160,7 +161,11 @@ function Launchpad() {
 	// const [linkOrder, setLinkOrder] = useState(generateLinkOrders());
 	// const [bookmarks, setBookmarks] = useState(bookmarksJson.data);
 
-
+	const [popupTitle, setPopupTitle] = useState('')
+	const [popupMessage, setPopupMessage] = useState('')
+	const [showPopup, setShowPopup] = useState(false);
+    const showPopupHandler = () => setShowPopup(true);
+    const closePopupHandler = () => setShowPopup(false);
 
 	const reset = () => {
 		api.reset();
@@ -285,6 +290,9 @@ function Launchpad() {
 			const destinationId = Number(destination.droppableId.replace('column', ''));
 
 			if (sectionOrder[sourceId].length <= 1) {
+				setPopupTitle('Error');
+				setPopupMessage('A column needs to have atleast 1 section within.')
+				showPopupHandler();
 				return;
 			}
 
@@ -379,6 +387,18 @@ function Launchpad() {
 					</Col>
 				</Row>
 			</Container>
+
+			<Modal show={showPopup} onHide={closePopupHandler}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{popupTitle}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{popupMessage}</Modal.Body>
+                <Modal.Footer>
+                    <Button className="button-gray" variant='secondary' onClick={closePopupHandler}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 		</>
 	);
 }

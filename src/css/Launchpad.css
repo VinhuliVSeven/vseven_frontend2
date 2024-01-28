@@ -16,7 +16,7 @@ Col {
     overflow-y: scroll;
     z-index: 2;
 
-    background-color: var(--primary-blue);
+    background-color: rgba(210, 211, 213, 0.5)
 }
 
 .section-column {
@@ -34,11 +34,11 @@ Col {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    background-size: 102%;
-    left: 20vw;
+    background-size: 100%;
+    left: 0;
     right: 0;
     top: 104px;
-    width: 80vw;
+    width: 100vw;
     height: 100vh;
 
     /* filter: blur(4px);
