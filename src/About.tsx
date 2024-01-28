@@ -11,8 +11,8 @@ function About() {
                 <Card.Body>
                     <Card.Text><strong>Address:</strong> Vinhomes Ocean Park, Gia Lam District, Hanoi</Card.Text>
                     <Card.Text><strong>Email:</strong> registrar@vinuni.edu.vn</Card.Text>
-                    <Card.Link href="https://www.facebook.com/vinuniversity/"><img width='24' src={facebook}/></Card.Link>
-                    <Card.Link href="https://www.youtube.com/channel/UC-XZodYpSIIogum4QqbENAA"><img width='24' src={youtube}/></Card.Link>
+                    <Card.Link target="_blank" href="https://www.facebook.com/vinuniversity/"><img width='24' src={facebook}/></Card.Link>
+                    <Card.Link target="_blank" href="https://www.youtube.com/channel/UC-XZodYpSIIogum4QqbENAA"><img width='24' src={youtube}/></Card.Link>
                 </Card.Body>
             </Card>
         </>
