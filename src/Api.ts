@@ -63,6 +63,10 @@ export class Api {
             }
         }
 
+        public getUsername() {
+            return this.data.userName;
+        }
+
         public getLinks() {
             var links: {
                 sectionId: string;

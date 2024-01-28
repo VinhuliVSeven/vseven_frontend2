@@ -350,7 +350,7 @@ function Launchpad() {
 			<Header></Header>
 			<Container fluid className='vh-100 d-flex flex-column columns'>
 				<Row className='h-100'>
-					<Col className='fixed-column vb-primary-blue pt-3'>
+					<Col className='fixed-column pt-3'>
 						<Stack gap={3}>
 							<Account state={loggedIn} setState={toggleLoggedIn} setApi={setApi} reset={reset}></Account>
 							{

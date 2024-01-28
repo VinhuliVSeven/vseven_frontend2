@@ -5,6 +5,7 @@ import { Api } from "./Api";
 interface Props {
     setState: any,
     setApi: React.Dispatch<React.SetStateAction<Api>>,
+    setUsername: React.Dispatch<React.SetStateAction<string>>
 }
 
 function Login(props: Props) {
@@ -48,6 +49,7 @@ function Login(props: Props) {
         const api = new Api(parseInt(parsedUsername), password)
         api.get().then((data) => {
             props.setApi(api);
+            props.setUsername(data.getUsername());
             props.setState();
             closeHandler();
         }).catch((error) => {
