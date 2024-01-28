@@ -84,7 +84,7 @@ function SectionAdd(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Section to Column {props.column}</Modal.Title>
+                    <Modal.Title><strong>Add New Section to Column {props.column}</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'addSection' + props.column} noValidate validated={validated}>

@@ -141,7 +141,7 @@ function SectionEdit(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Section {props.section.sectionId}</Modal.Title>
+                    <Modal.Title><strong>Edit Section {props.section.sectionId}</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'editSection' + props.section.sectionId} noValidate validated={validated}>

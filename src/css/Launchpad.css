@@ -12,13 +12,13 @@ Col {
     width: 20%;
     flex: 0 0 20%;
     max-width: 20%;
-    max-height: calc(100vh - 56px);
+    max-height: calc(100vh - 80px);
     overflow-y: scroll;
     z-index: 2;
 }
 
 .section-column {
-    max-height: calc(100vh - 56px);
+    max-height: calc(100vh - 80px);
     overflow-y: scroll;
 }
 
@@ -28,19 +28,19 @@ Col {
     right: 0;
     z-index: 1;
     display: block;
-    background-image: url('../assets/section-background.png');
+    background-image: url('../assets/section-background2.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: 102%;
     left: 20vw;
     right: 0;
-    top: 0px;
+    top: 80px;
     width: 80vw;
     height: 100vh;
 
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
 }
 
 .section-column .content {
@@ -55,7 +55,7 @@ Col {
     position: fixed;
     left: 0;
     right: 0;
-    top: 56px;
+    top: 80px;
     z-index: 1;
     display: block;
 }

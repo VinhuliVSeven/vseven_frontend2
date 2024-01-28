@@ -78,7 +78,7 @@ function LinkAdd(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Link to Section {props.sectionId}</Modal.Title>
+                    <Modal.Title><strong>Add New Link to Section {props.sectionId}</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'addLink' + props.sectionId} noValidate validated={validated}>

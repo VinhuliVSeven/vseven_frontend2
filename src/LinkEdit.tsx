@@ -136,7 +136,7 @@ function LinkEdit(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Link {props.link.linkId} of Section {props.sectionId}</Modal.Title>
+                    <Modal.Title><strong>Edit Link {props.link.linkId} of Section {props.sectionId}</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'editLink' + props.link.linkId + 'section' + props.sectionId} noValidate validated={validated}>

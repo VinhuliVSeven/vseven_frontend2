@@ -61,7 +61,7 @@ function Login(props: Props) {
 
             <Modal show={show} onHide={closeHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Sign In</Modal.Title>
+                    <Modal.Title><strong>Sign In</strong></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={submitHandler} id={'login'} noValidate validated={validated}>
