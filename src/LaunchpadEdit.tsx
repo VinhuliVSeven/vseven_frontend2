@@ -16,7 +16,7 @@ function LaunchpadEdit(props: Props) {
             <Card.Header as='h6'><span className="fixed-title">Launchpad Edit</span></Card.Header>
             <Card.Body>
                 <Button className='button float-right' variant='primary' onClick={props.save}>Save</Button>{' '}
-                <Button className='button float-right' variant='primary' onClick={props.cancel}>Cancel</Button>{' '}
+                <Button className='button-gray float-right' variant='secondary' onClick={props.cancel}>Cancel</Button>{' '}
             </Card.Body>
         </Card>
         
