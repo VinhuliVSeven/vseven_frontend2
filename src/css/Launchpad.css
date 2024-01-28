@@ -12,15 +12,15 @@ Col {
     width: 20%;
     flex: 0 0 20%;
     max-width: 20%;
-    max-height: calc(100vh - 84px);
+    max-height: calc(100vh - 104px);
     overflow-y: scroll;
     z-index: 2;
 
-    background-color: var(--accent-gray);
+    background-color: var(--primary-blue);
 }
 
 .section-column {
-    max-height: calc(100vh - 84px);
+    max-height: calc(100vh - 104px);
     overflow-y: scroll;
 }
 
@@ -37,7 +37,7 @@ Col {
     background-size: 102%;
     left: 20vw;
     right: 0;
-    top: 84px;
+    top: 104px;
     width: 80vw;
     height: 100vh;
 
@@ -57,7 +57,7 @@ Col {
     position: fixed;
     left: 0;
     right: 0;
-    top: 84px;
+    top: 104px;
     z-index: 1;
     display: block;
 }
