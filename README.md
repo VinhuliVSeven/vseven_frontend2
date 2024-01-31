@@ -17,7 +17,7 @@
 
 
 ## Codebase Structure
-./src/assets - stores assets
-./src/css - stores css files
-./src/json - stores data about sections and links (temporary only, will be replaced by backend)
-./src - typescript files
+- ./src/assets - stores assets
+- ./src/css - stores css files
+- ./src/json - stores data about sections and links (temporary only, will be replaced by backend)
+- ./src - typescript files
