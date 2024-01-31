@@ -7,17 +7,17 @@
 
 Required dependencies:
 ```json
-  "dependencies": {
-    "axios": "^1.6.5",
-    "bootstrap": "^5.3.2",
-    "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
-    "react-bootstrap": "^2.9.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.1"
-  }
+"dependencies": {
+  "axios": "^1.6.5",
+  "bootstrap": "^5.3.2",
+  "react": "^18.2.0",
+  "react-beautiful-dnd": "^13.1.1",
+  "react-bootstrap": "^2.9.1",
+  "react-dnd": "^16.0.1",
+  "react-dnd-html5-backend": "^16.0.1",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.21.1"
+}
 ```
 
 ## How to start the repo
