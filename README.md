@@ -15,6 +15,11 @@
 
 ## Developer Workflow
 
+1. Read user story
+2. Discuss details with project manager
+3. Implementation
+4. Testing
+5. Fix any bugs
 
 ## Codebase Structure
 - ./src/assets - stores assets
