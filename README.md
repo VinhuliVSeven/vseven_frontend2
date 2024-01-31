@@ -23,12 +23,12 @@ Required dependencies:
 ## How to start the repo
 
 1. Clone the [backend repo](https://github.com/AmbiakaTT/vseven_backend) to your computer
-2. Setup the backend repo
+2. Setup the backend using the instructions from the backend repo
 3. Start the backend
 4. Clone the this repo to your computer
 5. Open the repo directory in your terminal
 6. Type <code>npm run dev</code> to start front end
-7. Access website via <code>localhost:8080</code> via browser
+7. Access website via <code>localhost:5173</code> via browser
 
 ## Developer Workflow
 
