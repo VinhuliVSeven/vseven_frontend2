@@ -6,6 +6,7 @@
 2. Install vite 4.4.5 or higher <code>npm install vite</code>
 
 Required dependencies:
+```json
   "dependencies": {
     "axios": "^1.6.5",
     "bootstrap": "^5.3.2",
@@ -17,6 +18,7 @@ Required dependencies:
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1"
   }
+```
 
 ## How to start the repo
 
